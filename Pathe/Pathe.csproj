@@ -61,6 +61,7 @@
     <Content Include="css\material.css.map" />
     <Content Include="css\ripples.css.map" />
     <Content Include="css\roboto.css.map" />
+    <Content Include="film.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -100,6 +101,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\LICENSE.txt" />
     <Content Include="fonts\Material-Design-Icons.svg" />
+    <Content Include="Global.asax" />
     <Content Include="inc\menu.aspx" />
     <Content Include="index.aspx" />
     <Content Include="js\bootstrap.js" />
@@ -113,6 +115,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="film.aspx.cs">
+      <DependentUpon>film.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="film.aspx.designer.cs">
+      <DependentUpon>film.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="inc\menu.aspx.cs">
       <DependentUpon>menu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

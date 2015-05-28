@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Pathe.index" %>
+<%@ Import Namespace="System.IO" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -605,6 +606,12 @@
     <script type="text/javascript">
     $.material.init();
     </script>
+      
+    <!-- Add active class to current menu item -->
+    <script type="text/javascript">
+        <% string pageName = Path.GetFileNameWithoutExtension(Page.AppRelativeVirtualPath); %>
+        $("#menu_<%=pageName%>").addClass("active");
+    </script>    
   </body>
 </html>
 

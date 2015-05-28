@@ -12,15 +12,13 @@
         </div>
         <div id='navbar' class='navbar-collapse collapse'>
           <ul class='nav navbar-nav'>
-            <li><a href='index.html'>Home</a></li>
-            <li><a href='overview.html'>Overzicht</a></li>
-            <!--<li class='dropdown'>
-            <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'>My Info<span class='caret'></span></a>
+            <li id="menu_index"><a href='index.aspx'>Home</a></li>
+            <li id="menu_films" class='dropdown'>
+            <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'>Films<span class='caret'></span></a>
               <ul class='dropdown-menu' role='menu'>
-                <li><a href='/partners/me/profile'>Profile</a></li>
-                <li><a href='/partners/me/promos'>Promo Codes</a></li>
-                <li><a href='/partners/me/links'>Affiliate Links</a></li>
-                <li><a href='/partners/me/stats'>Statistics</a></li>
+                <li><a href='/films/actueel'>Actueel</a></li>
+                <li><a href='/films/verwacht'>Verwacht</a></li>
+                <li><a href='/films/archief'>Archief</a></li>
               </ul>
             </li>
             <li class='dropdown'>
@@ -33,7 +31,7 @@
                 <li><a href='/partners/admin/promos'>Promotions</a></li>
                 <li><a href='/partners/admin/links'>Links</a></li>
               </ul>
-            </li>-->
+            </li>
           </ul>
         </div>
       </div>
