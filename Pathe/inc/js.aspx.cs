@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Pathe
+namespace Pathe.inc
 {
-    public partial class index : System.Web.UI.Page
+    public partial class js : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

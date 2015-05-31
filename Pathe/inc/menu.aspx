@@ -8,11 +8,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">Animal shelter</a>
+          <a class="navbar-brand" href="/">Pathé</a>
         </div>
         <div id='navbar' class='navbar-collapse collapse'>
           <ul class='nav navbar-nav'>
-            <li id="menu_index"><a href='index.aspx'>Home</a></li>
+            <li id="menu_default"><a href='/'>Home</a></li>
             <li id="menu_films" class='dropdown'>
             <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'>Films<span class='caret'></span></a>
               <ul class='dropdown-menu' role='menu'>

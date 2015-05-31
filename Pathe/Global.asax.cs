@@ -13,11 +13,32 @@ namespace Pathe
 
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.MapPageRoute("filmsActueel", "Films/Actueel", "~/films.aspx");
-            routes.MapPageRoute("filmsArchief", "Films/Archief", "~/films.aspx");
-            routes.MapPageRoute("filmsVerwacht", "Films/Verwacht", "~/films.aspx");
+            // <3 routing
+            // General routes
+            routes.MapPageRoute("filmsOverview", "Films/{action}/{page}", "~/films.aspx", true,
+                new RouteValueDictionary {{"action", "actueel"}, {"page", "1"}});
 
-            routes.MapPageRoute("filmDetails", "Film/{prettyurl}", "~/film.aspx", true, new RouteValueDictionary{ { "pretty-url", null } });
+            routes.MapPageRoute("filmDetails", "Film/{film}/{action}/{*vars}", "~/film.aspx", true,
+                new RouteValueDictionary {{"action", "show"}, {"film", "none"}});
+
+            // User routes
+            routes.MapPageRoute("userProfile", "User/Me", "~/profile.aspx");
+
+
+            // Admin routes
+            routes.MapPageRoute("adminOverview", "Admin", "~/admin/default.aspx");
+
+            routes.MapPageRoute("adminFilms", "Admin/Films/{action}/{film}", "~/admin/films.aspx", true,
+                new RouteValueDictionary {{"action", "list"}, {"film", "none"}});
+
+            routes.MapPageRoute("adminCinema", "Admin/Cinema/{action}/{cinema}", "~/admin/cinemas.aspx", true,
+                new RouteValueDictionary {{"action", "list"}, {"cinema", "none"}});
+
+            routes.MapPageRoute("adminUsers", "Admin/Users/{action}/{user}", "~/admin/users.aspx", true,
+                new RouteValueDictionary {{"action", "list"}, {"user", "none"}});
+
+            routes.MapPageRoute("adminAgenda", "Admin/Agenda/{action}/{entry}", "~/admin/agenda.aspx", true,
+                new RouteValueDictionary { { "action", "list" }, { "entry", "none" } });
         }
 
         protected void Application_Start(object sender, EventArgs e)

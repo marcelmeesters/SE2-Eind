@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Oracle.DataAccess, Version=4.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -62,6 +63,7 @@
     <Content Include="css\ripples.css.map" />
     <Content Include="css\roboto.css.map" />
     <Content Include="film.aspx" />
+    <Content Include="films.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -102,8 +104,10 @@
     <Content Include="fonts\LICENSE.txt" />
     <Content Include="fonts\Material-Design-Icons.svg" />
     <Content Include="Global.asax" />
+    <Content Include="inc\header.aspx" />
+    <Content Include="inc\js.aspx" />
     <Content Include="inc\menu.aspx" />
-    <Content Include="index.aspx" />
+    <Content Include="default.aspx" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\holder.js" />
@@ -112,9 +116,11 @@
     <Content Include="js\ripples.js" />
     <Content Include="js\ripples.min.js" />
     <Content Include="template.aspx" />
+    <Content Include="template_page.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="database.cs" />
     <Compile Include="film.aspx.cs">
       <DependentUpon>film.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -122,8 +128,29 @@
     <Compile Include="film.aspx.designer.cs">
       <DependentUpon>film.aspx</DependentUpon>
     </Compile>
+    <Compile Include="films.aspx.cs">
+      <DependentUpon>films.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="films.aspx.designer.cs">
+      <DependentUpon>films.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="inc\header.aspx.cs">
+      <DependentUpon>header.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="inc\header.aspx.designer.cs">
+      <DependentUpon>header.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="inc\js.aspx.cs">
+      <DependentUpon>js.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="inc\js.aspx.designer.cs">
+      <DependentUpon>js.aspx</DependentUpon>
     </Compile>
     <Compile Include="inc\menu.aspx.cs">
       <DependentUpon>menu.aspx</DependentUpon>
@@ -132,12 +159,12 @@
     <Compile Include="inc\menu.aspx.designer.cs">
       <DependentUpon>menu.aspx</DependentUpon>
     </Compile>
-    <Compile Include="index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="template.aspx.cs">
@@ -147,8 +174,17 @@
     <Compile Include="template.aspx.designer.cs">
       <DependentUpon>template.aspx</DependentUpon>
     </Compile>
+    <Compile Include="template_page.aspx.cs">
+      <DependentUpon>template_page.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="template_page.aspx.designer.cs">
+      <DependentUpon>template_page.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="admin\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
