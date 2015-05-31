@@ -15,7 +15,7 @@ namespace Pathe
         {
             // <3 routing
             // General routes
-            routes.MapPageRoute("filmsOverview", "Films/{action}/{page}", "~/films.aspx", true,
+            routes.MapPageRoute("filmsOverview", "Films/{action}/{page}/{*vars}", "~/films.aspx", true,
                 new RouteValueDictionary {{"action", "actueel"}, {"page", "1"}});
 
             routes.MapPageRoute("filmDetails", "Film/{film}/{action}/{*vars}", "~/film.aspx", true,

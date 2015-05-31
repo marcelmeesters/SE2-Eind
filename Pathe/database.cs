@@ -60,8 +60,8 @@ namespace Pathe
             }
             catch (OracleException ex)
             {
-                Console.Write("Couldn't create connectionstring!");
-                Console.Write(ex);
+                System.Diagnostics.Debug.Write("Couldn't create connectionstring!");
+                System.Diagnostics.Debug.Write(ex);
                 throw new Exception("There was an error to make a new connectionstring!\nCode: " + ex.ErrorCode +
                                     "\nMessage: " + ex.Message);
             }
@@ -76,13 +76,13 @@ namespace Pathe
         {
             try
             {
-                Console.WriteLine("Opening Database Connection");
+                System.Diagnostics.Debug.WriteLine("Opening Database Connection");
                 connect.Open();
                 return true;
             }
             catch (OracleException ex)
             {
-                Console.WriteLine(ex);
+                System.Diagnostics.Debug.WriteLine(ex);
                 if (ex.Message == "Connection is already open")
                 {
                     return false;
@@ -99,15 +99,15 @@ namespace Pathe
         {
             try
             {
-                Console.WriteLine("Closing Database Connection");
+                System.Diagnostics.Debug.WriteLine("Closing Database Connection");
                 connect.Close();
-                Console.WriteLine("---------------");
+                System.Diagnostics.Debug.WriteLine("---------------");
                 return true;
             }
             catch (OracleException ex)
             {
                 string error = "ERROR DETECTED!\nCode: " + ex.ErrorCode + "\nMessage: " + ex.Message;
-                Console.WriteLine(error);
+                System.Diagnostics.Debug.WriteLine(error);
                 return false;
             }
         }
@@ -224,15 +224,15 @@ namespace Pathe
         /// </returns>
         public bool Execute(string query)
         {
-            Console.WriteLine("---------------");
-            Console.WriteLine("Attempting to execute query: {0}", query);
+            System.Diagnostics.Debug.WriteLine("---------------");
+            System.Diagnostics.Debug.WriteLine("Attempting to execute query: {0}", query);
             try
             {
                 if (!Open_Connection()) throw new Exception("Could not connect to database");
 
                 OracleCommand cmd = new OracleCommand(query, connect);
                 cmd.ExecuteNonQuery();
-                Console.WriteLine("COMPLETE");
+                System.Diagnostics.Debug.WriteLine("COMPLETE");
                 return true;
             }
             finally
@@ -248,8 +248,8 @@ namespace Pathe
         public List<Dictionary<string, object>> ExecuteQuery(string query)
         {
             List<Dictionary<string, object>> result = new List<Dictionary<string, object>>();
-            Console.WriteLine("---------------");
-            Console.WriteLine("Attempting to execute query: {0}", query);
+            System.Diagnostics.Debug.WriteLine("---------------");
+            System.Diagnostics.Debug.WriteLine("Attempting to execute query: {0}", query);
             try
             {
                 if (!Open_Connection()) throw new Exception("Could not connect to database");
@@ -267,16 +267,16 @@ namespace Pathe
 
                     result.Add(row);
                 }
-                Console.WriteLine("COMPLETE");
+                System.Diagnostics.Debug.WriteLine("COMPLETE");
                 return result;
             }
             catch (OracleException ex)
             {
-                Console.WriteLine("---------- ERROR WHILE EXECUTING QUERY ----------");
-                Console.WriteLine("Error while executing query: {0}", query);
-                Console.WriteLine("Error code: {0}", ex.ErrorCode);
-                Console.WriteLine("Error message: {0}", ex.Message);
-                Console.WriteLine("---------- END OF EXCEPTION ----------");
+                System.Diagnostics.Debug.WriteLine("---------- ERROR WHILE EXECUTING QUERY ----------");
+                System.Diagnostics.Debug.WriteLine("Error while executing query: {0}", query);
+                System.Diagnostics.Debug.WriteLine("Error code: {0}", ex.ErrorCode);
+                System.Diagnostics.Debug.WriteLine("Error message: {0}", ex.Message);
+                System.Diagnostics.Debug.WriteLine("---------- END OF EXCEPTION ----------");
             }
             finally
             {

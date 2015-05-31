@@ -16,3 +16,13 @@ body {
 .theme-showcase .navbar .container {
   width: auto;
 }
+
+.movie_thumb {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+h4.movie_title {
+    height: 3em;
+}
