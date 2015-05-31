@@ -4,7 +4,7 @@
 
     <script src="/js/material.min.js"></script>
     <script src="/js/ripples.min.js"></script>
-    <script src="/js/holder.js"></script>
+    <script src="/js/holder.min.js"></script>
 
     <script type="text/javascript">
     $.material.init();
