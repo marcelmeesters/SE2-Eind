@@ -120,6 +120,35 @@ namespace Pathe
             return ExecuteQuery(query);
         }
 
+        public List<Dictionary<string, object>> GetFilms(int type = 1)
+        {
+            string query = "";
+            switch (type)
+            {
+                case 1: // Actueel
+                    query =
+                        "SELECT DISTINCT f.Titel FROM Film f " +
+                        "WHERE f.FilmID IN ( " +
+                            "SELECT f.FilmID FROM PLANNING p " +
+                            "JOIN ZAAL z ON z.ZaalID = p.Zaal " +
+                            "JOIN FILM f ON f.FilmID = p.Film " +
+                            "JOIN FILM_TYPE t ON t.Naam = p.FilmType " +
+                            "JOIN BIOSCOOP b ON b.BioscoopID = z.Bioscoop " +
+                            "p.Tijd >= ((SELECT SYSDATE FROM dual))" +
+                        ") ORDER BY f.Titel ASC;";
+                    break;
+                case 2: // Verwacht
+                    query =
+                        "SELECT DISTINCT f.Titel FROM Film f WHERE f.releasedate > ((SELECT SYSDATE FROM dual) + 7) ORDER BY f.releasedate ASC;";
+                    break;
+                default:
+                    query = "SELECT DISTINCT f.Titel FROM FILM f ORDER BY f.Titel ASC;";
+                    break;
+            }
+
+            return ExecuteQuery(query);
+        }
+
         #endregion
 
         #region Methods - Insert
