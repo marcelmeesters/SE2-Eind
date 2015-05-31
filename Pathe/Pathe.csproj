@@ -87,12 +87,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\bootstrap-theme.css" />
-    <Content Include="css\bootstrap-theme.min.css" />
-    <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\custom.css" />
-    <Content Include="css\material-fullpalette.css" />
     <Content Include="css\material-fullpalette.min.css" />
     <Content Include="css\ripples.css" />
     <Content Include="css\ripples.min.css" />
