@@ -12,8 +12,6 @@ namespace Pathe
         protected void Page_Load(object sender, EventArgs e)
         {
             Database db = Database.Instance;
-
-                bool ok = db.Open_Connection();
         }
     }
 }

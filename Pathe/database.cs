@@ -83,6 +83,10 @@ namespace Pathe
             catch (OracleException ex)
             {
                 Console.WriteLine(ex);
+                if (ex.Message == "Connection is already open")
+                {
+                    return false;
+                }
                 throw;
             }
         }
