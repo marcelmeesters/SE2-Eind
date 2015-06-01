@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="films.aspx.cs" Inherits="Pathe.films" %>
+<%@ Import Namespace="System.ComponentModel" %>
 <%@ Import Namespace="System.IO" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,16 +24,18 @@
             <div class="row">
                 <asp:Repeater ID="Repeater1" runat="server" DataSourceID="FilmsDataSource">
                 <ItemTemplate>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="well ">
-                            <div class="movie_thumb holderjs" data-background-src="?holder.js/175x250?auto=yes&amp;textmode=exact">
+                    <a href="/Film/<%# Eval("FilmID") %>-<%# FormatTitleUrl( Eval("Titel")) %>">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="well ">
+                                <div class="movie_thumb holderjs" data-background-src="?holder.js/175x250?auto=yes&amp;textmode=exact">
                                 
-                            </div>
-                            <div class="movie_info">
-                                <h4 class="movie_title"><%# Eval("Titel") %></h4>
+                                </div>
+                                <div class="movie_info">
+                                    <h4 class="movie_title"><%# Eval("Titel") %></h4>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </ItemTemplate>
             </asp:Repeater>
             </div>

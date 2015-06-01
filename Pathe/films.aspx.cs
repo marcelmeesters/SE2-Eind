@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -73,6 +74,14 @@ namespace Pathe
             }
             System.Diagnostics.Debug.WriteLine(listQuery);
             FilmsDataSource.SelectCommand = listQuery;
+        }
+
+        public static string FormatTitleUrl(object title)
+        {
+            
+            string title1 = title as string;
+
+            return (title1 == null) ? null : Regex.Replace(title1.Replace(" ", "-"), "[^a-zA-Z0-9-]+", "");
         }
     }
 }

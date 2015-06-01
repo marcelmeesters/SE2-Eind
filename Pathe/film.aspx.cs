@@ -11,7 +11,12 @@ namespace Pathe
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            string filmUrl = (string) Page.RouteData.Values["film"];
+            string actionUrl = (string) Page.RouteData.Values["action"];
+            string varsUrl = (string) Page.RouteData.Values["vars"];
+            
+            int filmID =
+                int.Parse(filmUrl.Substring(0, filmUrl.IndexOf("-", StringComparison.Ordinal)));
         }
     }
 }

@@ -26,3 +26,14 @@ body {
 h4.movie_title {
     height: 3em;
 }
+
+.movie_info img{
+    width: 175px;
+    height: 250px;
+    display: inline-block;
+}
+
+.movie_info p {
+    display: inline-block;
+    vertical-align: top;
+}

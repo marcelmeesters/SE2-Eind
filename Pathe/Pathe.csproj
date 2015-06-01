@@ -177,6 +177,7 @@
     <Compile Include="template_page.aspx.designer.cs">
       <DependentUpon>template_page.aspx</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="admin\" />

@@ -18,28 +18,27 @@ namespace Pathe
         private string host;
         private OracleConnection connect = new OracleConnection();
 
-        #endregion
-
-        #region Fields
-
-        public string TestString { get; set; }
+        // Singleton
+        private static readonly Lazy<Database> instance =
+            new Lazy<Database>(() => new Database());
 
         #endregion
 
         #region Constructor
 
-        private static readonly Lazy<Database> lazy =
-            new Lazy<Database>(() => new Database());
-
-        public static Database Instance { get { return lazy.Value; } }
-
         /// <summary>
         /// Initialize the connection with the database
         /// </summary>
-        public Database()
+        private Database()
         {
             Initialize();
         }
+
+        #endregion
+
+        #region Properties
+
+        public static Database Instance { get { return instance.Value; } }
 
         #endregion
 

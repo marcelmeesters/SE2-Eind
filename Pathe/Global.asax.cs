@@ -19,7 +19,8 @@ namespace Pathe
                 new RouteValueDictionary {{"action", "actueel"}, {"page", "1"}});
 
             routes.MapPageRoute("filmDetails", "Film/{film}/{action}/{*vars}", "~/film.aspx", true,
-                new RouteValueDictionary {{"action", "show"}, {"film", "none"}});
+                new RouteValueDictionary {{"action", "show"}, {"film", "none"}},
+                new RouteValueDictionary {{"film", "[0-9]+-[0-9a-z-]*"}});
 
             // User routes
             routes.MapPageRoute("userProfile", "User/Me", "~/profile.aspx");
