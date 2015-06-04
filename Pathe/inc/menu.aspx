@@ -32,6 +32,16 @@
                 <li><a href='/partners/admin/links'>Links</a></li>
               </ul>
             </li>
+              <li>
+                  <asp:LoginView ID="LoginViewMenu" runat="server">
+              <AnonymousTemplate>
+                  <a href="/Login">Log in</a>
+              </AnonymousTemplate>
+              <LoggedInTemplate>
+                 <a><asp:LoginName ID="LoginNameMenu" runat="server" /></a>
+              </LoggedInTemplate>
+          </asp:LoginView>
+              </li>
           </ul>
         </div>
       </div>

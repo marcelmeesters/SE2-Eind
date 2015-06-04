@@ -60,6 +60,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\default.aspx" />
     <Content Include="css\material-fullpalette.css.map" />
     <Content Include="css\material.css.map" />
     <Content Include="css\ripples.css.map" />
@@ -116,11 +117,19 @@
     <Content Include="js\ripples.min.js" />
     <Content Include="login.aspx" />
     <Content Include="register.aspx" />
+    <Content Include="roles.aspx" />
     <Content Include="template.aspx" />
     <Content Include="template_page.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="database.cs" />
     <Compile Include="film.aspx.cs">
       <DependentUpon>film.aspx</DependentUpon>
@@ -182,6 +191,13 @@
     <Compile Include="register.aspx.designer.cs">
       <DependentUpon>register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="roles.aspx.cs">
+      <DependentUpon>roles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="roles.aspx.designer.cs">
+      <DependentUpon>roles.aspx</DependentUpon>
+    </Compile>
     <Compile Include="template.aspx.cs">
       <DependentUpon>template.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -198,9 +214,7 @@
     </Compile>
     <Compile Include="User.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="admin\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

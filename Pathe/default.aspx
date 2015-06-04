@@ -6,13 +6,27 @@
 
   <body role="document">
 
+      <form id="form1" runat="server">
+
     <!--#include file="inc/menu.aspx"-->
     <div class="container theme-showcase" role="main">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Animal Shelter</h1>
-        <p>Welkom op animal Shelter :D<br></p>
+        <p>Welkom op animal Shelter :D<br>
+            
+            <asp:LoginView ID="LoginView1" runat="server">
+              <AnonymousTemplate>
+                  U bent niet ingelogd
+              </AnonymousTemplate>
+              <LoggedInTemplate>
+                  U bent ingelogd als <asp:LoginName ID="LoginName1" runat="server" />
+              </LoggedInTemplate>
+          </asp:LoginView>
+
+        </p>
+          
       </div>
 
       <div class="page-header">
@@ -569,6 +583,8 @@
     </div> <!-- /container -->
 
 <!--#include file="inc/js.aspx"-->
+    
+      </form>
     
   </body>
 </html>
