@@ -1,0 +1,8 @@
+﻿<siteMap>
+  <siteMapNode title="Home" description="Home" url="~/default.aspx"></siteMapNode>
+  <siteMapNode title="Films" description="Films" url="~/Films">
+    <siteMapNode title="Actueel" description="Actuele films" url="~/Films/Actueel"></siteMapNode>
+    <siteMapNode title="Verwacht" description="Verwachte films" url="~/Films/Verwacht"></siteMapNode>
+    <siteMapNode title="Archief" description="Alle films" url="~/Films/Archief"></siteMapNode>
+  </siteMapNode>
+</siteMap>

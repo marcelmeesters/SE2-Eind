@@ -115,38 +115,24 @@ namespace Pathe
 
         #region Methods - Select
 
-        /*public User VerifyLogin(string username, string password)
+        public List<Dictionary<string, object>> GetFilmInfo(int filmID)
         {
-            var commandText = "SELECT * FROM ";
+            OracleCommand cmd = new OracleCommand("SELECT * FROM film WHERE filmID = :filmID");
+            cmd.Parameters.Add(new OracleParameter("filmID", filmID));
 
-            using (OracleConnection connection = new OracleConnection(connectionString))
-            using (OracleCommand command = new OracleCommand(commandText, connection))
-            {
-                command.Parameters.AddWithValue("SL_NO", 1);
-                command.Parameters.AddWithValue("empane", "sree");
-                command.Parameters.AddWithValue("empid", 1002);
-                command.Parameters.AddWithValue("salaray", 20000);
-                command.Connection.Open();
-                command.ExecuteNonQuery();
-                command.Connection.Close();
-            }
-        }*/
-
-        public List<Dictionary<string, object>> GetVenue()
-        {
-            string query = string.Format("SELECT v.* FROM VENUE v " +
-                                         "JOIN EVENT_VENUE e ON e.venueID = v.venueID " +
-                                         "WHERE e.eventID = {0}", 1);
-            return ExecuteQuery(query);
-        }
+            return ExecuteQuery(cmd);
+        } 
 
         public List<Dictionary<string, object>> GetFilms(int type = 1)
         {
             string query = "";
+
+            OracleCommand cmd = new OracleCommand();
+
             switch (type)
             {
                 case 1: // Actueel
-                    query =
+                    cmd.CommandText =
                         "SELECT DISTINCT f.Titel FROM Film f " +
                         "WHERE f.FilmID IN ( " +
                             "SELECT f.FilmID FROM PLANNING p " +
@@ -158,15 +144,15 @@ namespace Pathe
                         ") ORDER BY f.Titel ASC;";
                     break;
                 case 2: // Verwacht
-                    query =
+                    cmd.CommandText =
                         "SELECT DISTINCT f.Titel FROM Film f WHERE f.releasedate > ((SELECT SYSDATE FROM dual) + 7) ORDER BY f.releasedate ASC;";
                     break;
                 default:
-                    query = "SELECT DISTINCT f.Titel FROM FILM f ORDER BY f.Titel ASC;";
+                    cmd.CommandText = "SELECT DISTINCT f.Titel FROM FILM f ORDER BY f.Titel ASC;";
                     break;
             }
 
-            return ExecuteQuery(query);
+            return ExecuteQuery(cmd);
         }
 
         #endregion
@@ -181,9 +167,11 @@ namespace Pathe
         /// <returns>true if success, false if not</returns>
         public bool CreateGroup(int locID, int paid)
         {
-            string query = string.Format("INSERT INTO EVENTGROUP VALUES (NULL, {0}, {1}, {2})", locID, paid, 1);
+            OracleCommand cmd = new OracleCommand("INSERT INTO EVENTGROUP VALUES (NULL, :locID, :paid, 1)");
+            cmd.Parameters.Add(new OracleParameter("locID", locID));
+            cmd.Parameters.Add(new OracleParameter("paid", paid));
 
-            return Execute(query);
+            return Execute(cmd);
         }
 
         #endregion
@@ -204,12 +192,20 @@ namespace Pathe
         public bool UpdateItem(int itemID, int depostID, int categoryID, int brandID, int stock, string name,
             string description)
         {
-            string query =
-                string.Format(
-                    "UPDATE ITEM SET name='{0}', description='{1}', brandID={2}, categoryID={3}, stock={4}, depositID={5} WHERE itemID={6}",
-                    name, description, brandID, categoryID, stock, depostID, itemID);
+            OracleCommand cmd =
+                new OracleCommand(
+                    "UPDATE ITEM SET name = ':name', description = ':description', brandID = :brandID, categoryID = :categoryID, " +
+                    "stock = :stock, depositID = :depositID WHERE itemID = :itemID");
 
-            return Execute(query);
+            cmd.Parameters.Add(new OracleParameter("name", name));
+            cmd.Parameters.Add(new OracleParameter("description", description));
+            cmd.Parameters.Add(new OracleParameter("brandID", brandID));
+            cmd.Parameters.Add(new OracleParameter("categoryID", categoryID));
+            cmd.Parameters.Add(new OracleParameter("stock", stock));
+            cmd.Parameters.Add(new OracleParameter("depositID", depostID));
+            cmd.Parameters.Add(new OracleParameter("itemID", itemID));
+
+            return Execute(cmd);
         }
 
         #endregion
@@ -223,8 +219,10 @@ namespace Pathe
         /// <returns>true if success, false otherwise</returns>
         public bool DeleteItem(int itemID)
         {
-            string query = string.Format("DELETE FROM item WHERE itemID = {0}", itemID);
-            return Execute(query);
+            OracleCommand cmd = new OracleCommand("DELETE FROM item WHERE itemID = :itemID");
+            cmd.Parameters.Add(new OracleParameter("itemID", itemID));
+
+            return Execute(cmd);
         }
         #endregion
 
@@ -238,15 +236,14 @@ namespace Pathe
         /// <returns>
         /// Returns true if successfull, false if not
         /// </returns>
-        public bool Execute(string query)
+        public bool Execute(OracleCommand cmd)
         {
             System.Diagnostics.Debug.WriteLine("---------------");
-            System.Diagnostics.Debug.WriteLine("Attempting to execute query: {0}", query);
+            System.Diagnostics.Debug.WriteLine("Attempting to execute query: {0}", cmd.ToString());
             try
             {
                 if (!Open_Connection()) throw new Exception("Could not connect to database");
 
-                OracleCommand cmd = new OracleCommand(query, connect);
                 cmd.ExecuteNonQuery();
                 System.Diagnostics.Debug.WriteLine("COMPLETE");
                 return true;
@@ -261,16 +258,18 @@ namespace Pathe
         /// Executes query and returns the result in a processable format. MySqlExceptions will be had.
         /// </summary>
         /// <returns>List&lt;Dictionary&lt;&lt;fieldName, value&gt;&gt; or null on failure</returns>
-        public List<Dictionary<string, object>> ExecuteQuery(string query)
+        public List<Dictionary<string, object>> ExecuteQuery(OracleCommand cmd)
         {
             List<Dictionary<string, object>> result = new List<Dictionary<string, object>>();
             System.Diagnostics.Debug.WriteLine("---------------");
-            System.Diagnostics.Debug.WriteLine("Attempting to execute query: {0}", query);
+            System.Diagnostics.Debug.WriteLine("Attempting to execute query: {0}", cmd.ToString());
             try
             {
                 if (!Open_Connection()) throw new Exception("Could not connect to database");
 
-                OracleDataReader resultReader = new OracleCommand(query, connect).ExecuteReader();
+                cmd.Connection = connect;
+
+                OracleDataReader resultReader = cmd.ExecuteReader();
 
                 //loop through the rows and add them to the result
                 while (resultReader.Read())
@@ -289,7 +288,7 @@ namespace Pathe
             catch (OracleException ex)
             {
                 System.Diagnostics.Debug.WriteLine("---------- ERROR WHILE EXECUTING QUERY ----------");
-                System.Diagnostics.Debug.WriteLine("Error while executing query: {0}", query);
+                System.Diagnostics.Debug.WriteLine("Error while executing query: {0}", cmd.ToString());
                 System.Diagnostics.Debug.WriteLine("Error code: {0}", ex.ErrorCode);
                 System.Diagnostics.Debug.WriteLine("Error message: {0}", ex.Message);
                 System.Diagnostics.Debug.WriteLine("---------- END OF EXCEPTION ----------");

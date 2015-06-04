@@ -7,12 +7,10 @@
 <body role="document">
 <!--#include file="inc/menu.aspx"-->
 <div class="container">
-    
+    <form id="filminfo" runat="server">
     <div class="jumbotron">
-        <h1><%= Page.RouteData.Values["film"] %></h1>
-        <p><strong>Film ID: </strong><%= Convert.ToString(Page.RouteData.Values["film"]).Substring(0, Convert.ToString(Page.RouteData.Values["film"]).IndexOf("-")) %><br/>
-            <strong>Action: </strong><%= Page.RouteData.Values["action"] %><br/>
-            <strong>vars: </strong><%= Page.RouteData.Values["vars"] %><br/>
+        <h1><asp:Label ID="lblTitle" runat="server" Text="Label"></asp:Label></h1>
+        <p>
         </p>
     </div>
     <div class="row">
@@ -20,7 +18,7 @@
             <div class="well movie_info">
                 <img src="holder.js/175x250" />
                 <p>
-                    Dit is informatie over de film :D
+                    <asp:Label ID="lblDescription" runat="server" Text="Label"></asp:Label>
                 </p>
             </div>
         </div>
@@ -31,7 +29,7 @@
             
         </div>
     </div>
-    
+    </form>
 </div>
 <!--#include file="inc/js.aspx"-->
 </body>

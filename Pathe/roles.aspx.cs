@@ -20,7 +20,8 @@ namespace Pathe
             if (!Roles.RoleExists("UserAdmin")) Roles.CreateRole("UserAdmin");
             if (!Roles.RoleExists("Customer")) Roles.CreateRole("Customer");
 
-            
+            Roles.AddUserToRole("cascer1", "GlobalAdmin");
+            Roles.RemoveUserFromRole("cascer1", "UserAdmin");
         }
     }
 }
