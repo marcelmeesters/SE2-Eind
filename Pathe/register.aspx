@@ -9,7 +9,7 @@
     <div class="row">
         <form id="registerform" runat="server">
             
-            <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" MembershipProvider="SqlProvider">
+            <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" MembershipProvider="MyOracleMembershipProvider">
                 <WizardSteps>
                     <asp:CreateUserWizardStep runat="server" />
                     <asp:CompleteWizardStep runat="server" />

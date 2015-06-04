@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row">
         <form id="loginform" runat="server">
-        <asp:Login ID="Login1" runat="server" RememberMeSet="True" cssclass="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12" MembershipProvider="SqlProvider">
+        <asp:Login ID="Login1" runat="server" RememberMeSet="True" cssclass="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12" MembershipProvider="MyOracleMembershipProvider">
             <LayoutTemplate>
                 <div class="well">
                     <h2 class="form-signin-heading">Log in om verder te gaan</h2>
