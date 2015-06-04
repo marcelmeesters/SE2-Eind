@@ -115,6 +115,23 @@ namespace Pathe
 
         #region Methods - Select
 
+        /*public User VerifyLogin(string username, string password)
+        {
+            var commandText = "SELECT * FROM ";
+
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            using (OracleCommand command = new OracleCommand(commandText, connection))
+            {
+                command.Parameters.AddWithValue("SL_NO", 1);
+                command.Parameters.AddWithValue("empane", "sree");
+                command.Parameters.AddWithValue("empid", 1002);
+                command.Parameters.AddWithValue("salaray", 20000);
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+                command.Connection.Close();
+            }
+        }*/
+
         public List<Dictionary<string, object>> GetVenue()
         {
             string query = string.Format("SELECT v.* FROM VENUE v " +

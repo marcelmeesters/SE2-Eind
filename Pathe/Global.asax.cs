@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
+using System.Web.UI;
 
 namespace Pathe
 {
@@ -45,6 +46,13 @@ namespace Pathe
         protected void Application_Start(object sender, EventArgs e)
         {
             RegisterRoutes(RouteTable.Routes);
+
+            ScriptManager.ScriptResourceMapping.AddDefinition("jquery",
+                new ScriptResourceDefinition
+                {
+                    Path = "~/js/jquery.min.js"
+                }
+            );
         }
 
         protected void Session_Start(object sender, EventArgs e)
