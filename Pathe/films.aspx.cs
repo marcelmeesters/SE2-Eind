@@ -11,26 +11,67 @@ namespace Pathe
     public partial class films : System.Web.UI.Page
     {
         private string listQuery = "";
+        private readonly string[] sortBy = { "TITEL", "RELEASEDATE", "DUUR", "FILMID" };
+        private readonly string[] sortModes = { "ASC", "DESC" };
+        private const int itemsPerPage = 12;
+
+        private int page = 1;
+        private string sort;
+        private string sortMode;
+        private string action;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Database db = Database.Instance;
-            string action = (string)Page.RouteData.Values["action"];
-            int page = 1;
+            sort = (string)Page.RouteData.Values["sort"] ?? "TITEL";
+            sortMode = (string)Page.RouteData.Values["sortmode"] ?? "ASC";
+            action = (string) Page.RouteData.Values["action"] ?? "actuuel";
+
+            // Pagination
             if (Page.RouteData.Values["page"] != null)
             {
-                page = int.Parse((string) Page.RouteData.Values["page"]);
+                page = int.Parse((string)Page.RouteData.Values["page"]);
             }
 
-            int itemsPerPage = 12;
+            string lowLimit = Convert.ToString(itemsPerPage * (page - 1) + 1);
+            string highLimit = Convert.ToString(itemsPerPage * page);
 
-            if (Page.RouteData.Values["vars"] != null)
+            // Sorting
+            if (!sortBy.Contains(sort.ToUpper())) sort = "TITEL";
+            if (!sortModes.Contains(sortMode.ToUpper())) sortMode = "ASC";
+
+            btnSortTitle.Attributes["href"] = string.Format("/Films/{0}/{1}/{2}/{3}", action, page, "TITLE", sortMode);
+            btnSortDate.Attributes["href"] = string.Format("/Films/{0}/{1}/{2}/{3}", action, page, "RELEASEDATE", sortMode);
+            btnSortDuration.Attributes["href"] = string.Format("/Films/{0}/{1}/{2}/{3}", action, page, "DUUR", sortMode);
+            btnSortId.Attributes["href"] = string.Format("/Films/{0}/{1}/{2}/{3}", action, page, "FILMID", sortMode);
+            btnAsc.Attributes["href"] = string.Format("/Films/{0}/{1}/{2}/{3}", action, page, sort, "ASC");
+            btnDesc.Attributes["href"] = string.Format("/Films/{0}/{1}/{2}/{3}", action, page, sort, "DESC");
+
+            switch (sort)
             {
-                itemsPerPage = int.Parse((string) Page.RouteData.Values["vars"]);
+                default:
+                    btnSortTitle.Attributes["class"] = "btn btn-success btn-small";
+                    break;
+                case "RELEASEDATE":
+                    btnSortDate.Attributes["class"] = "btn btn-success btn-small";
+                    break;
+                case "DUUR":
+                    btnSortDuration.Attributes["class"] = "btn btn-success btn-small";
+                    break;
+                case "FILMID":
+                    btnSortId.Attributes["class"] = "btn btn-success btn-small";
+                    break;
             }
 
-            string lowLimit = Convert.ToString(itemsPerPage*(page - 1) + 1);
-            string highLimit = Convert.ToString(itemsPerPage*page);
-
+            switch (sortMode)
+            {
+                default:
+                    btnAsc.Attributes["class"] = "btn btn-success btn-small";
+                    break;
+                case "DESC":
+                    btnDesc.Attributes["class"] = "btn btn-success btn-small";
+                    break;
+            }
 
             switch (action)
             {
@@ -47,7 +88,8 @@ namespace Pathe
                                 "ORDER BY f.Titel ASC " +
                             ") a " +
                             "where ROWNUM <= " + highLimit +
-                        ") where rnum  >= " + lowLimit;
+                        ") where rnum  >= " + lowLimit +
+                        "ORDER BY " + sort + " " + sortMode;
                     break;
                 case "archief":
                     listQuery =
@@ -56,7 +98,8 @@ namespace Pathe
                                 "SELECT * FROM FILM f ORDER BY f.Titel ASC " +
                             ") a "+
                             "where ROWNUM <= " + highLimit +
-                        ") where rnum  >= " + lowLimit;
+                        ") where rnum  >= " + lowLimit +
+                        "ORDER BY " + sort + " " + sortMode;
                     break;
                 case "verwacht":
                     listQuery =
@@ -69,7 +112,8 @@ namespace Pathe
                                 "ORDER BY f.Titel ASC" +
                             ") a " +
                             "where ROWNUM <= " + highLimit +
-                        ") where rnum  >= " + lowLimit;
+                        ") where rnum  >= " + lowLimit +
+                        "ORDER BY " + sort + " " + sortMode;
                     break;
             }
             System.Diagnostics.Debug.WriteLine(listQuery);

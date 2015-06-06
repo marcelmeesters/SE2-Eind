@@ -61,6 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\default.aspx" />
+    <Content Include="admin\film.aspx" />
+    <Content Include="admin\films.aspx" />
+    <Content Include="admin\inc\menu.aspx" />
     <Content Include="css\material-fullpalette.css.map" />
     <Content Include="css\material.css.map" />
     <Content Include="css\ripples.css.map" />
@@ -123,7 +126,9 @@
     <Content Include="roles.aspx" />
     <Content Include="template.aspx" />
     <Content Include="template_page.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\default.aspx.cs">
@@ -133,6 +138,27 @@
     <Compile Include="admin\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\film.aspx.cs">
+      <DependentUpon>film.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\film.aspx.designer.cs">
+      <DependentUpon>film.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\films.aspx.cs">
+      <DependentUpon>films.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\films.aspx.designer.cs">
+      <DependentUpon>films.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\inc\menu.aspx.cs">
+      <DependentUpon>menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\inc\menu.aspx.designer.cs">
+      <DependentUpon>menu.aspx</DependentUpon>
+    </Compile>
     <Compile Include="database.cs" />
     <Compile Include="film.aspx.cs">
       <DependentUpon>film.aspx</DependentUpon>
@@ -141,6 +167,7 @@
     <Compile Include="film.aspx.designer.cs">
       <DependentUpon>film.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Film.cs" />
     <Compile Include="films.aspx.cs">
       <DependentUpon>films.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

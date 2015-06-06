@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pathe {
+namespace Pathe.admin {
     
     
     public partial class film {

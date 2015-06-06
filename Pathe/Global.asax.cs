@@ -16,8 +16,8 @@ namespace Pathe
         {
             // <3 routing
             // General routes
-            routes.MapPageRoute("filmsOverview", "Films/{action}/{page}/{*vars}", "~/films.aspx", true,
-                new RouteValueDictionary {{"action", "actueel"}, {"page", "1"}});
+            routes.MapPageRoute("filmsOverview", "Films/{action}/{page}/{sort}/{sortmode}", "~/films.aspx", true,
+                new RouteValueDictionary {{"action", "actueel"}, {"page", "1"}, {"sort", "titel"}, {"sortmode", "asc"}});
 
             routes.MapPageRoute("filmDetails", "Film/{film}/{action}/{*vars}", "~/film.aspx", true,
                 new RouteValueDictionary {{"action", "show"}, {"film", "none"}},
@@ -32,8 +32,15 @@ namespace Pathe
             // Admin routes
             routes.MapPageRoute("adminOverview", "Admin", "~/admin/default.aspx");
 
-            routes.MapPageRoute("adminFilms", "Admin/Films/{action}/{film}", "~/admin/films.aspx", true,
-                new RouteValueDictionary {{"action", "list"}, {"film", "none"}});
+            routes.MapPageRoute("adminFilms", "Admin/Films/list/{page}/{sort}/{sortmode}", "~/admin/films.aspx",
+                true,
+                new RouteValueDictionary { { "page", "1" }, { "sort", "titel" }, { "sortmode", "asc" } });
+
+            routes.MapPageRoute("adminFilmAdd", "Admin/Films/add/{*vars}", "~/admin/filmAdd.aspx",
+                true);
+
+            routes.MapPageRoute("adminFilm", "Admin/Film/{film}/{action}", "~/admin/film.aspx", true,
+                new RouteValueDictionary { { "action", "show" }, { "film", "none" } });
 
             routes.MapPageRoute("adminCinema", "Admin/Cinema/{action}/{cinema}", "~/admin/cinemas.aspx", true,
                 new RouteValueDictionary {{"action", "list"}, {"cinema", "none"}});

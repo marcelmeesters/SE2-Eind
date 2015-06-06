@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Pathe
+namespace Pathe.admin
 {
     public partial class film : System.Web.UI.Page
     {
@@ -17,9 +17,9 @@ namespace Pathe
             string filmUrl = (string)Page.RouteData.Values["film"];
             string actionUrl = (string)Page.RouteData.Values["action"];
 
-            if (filmUrl == null || actionUrl == null) Response.Redirect("/Films/");
-            if (!Regex.IsMatch(filmUrl, @"[0-9]+-.*")) Response.Redirect("/Films/");
-
+            if (filmUrl == null || actionUrl == null) Response.Redirect("/Admin/Films/List/");
+            if (!Regex.IsMatch(filmUrl, @"[0-9]+-.*")) Response.Redirect("/Admin/Films/List/");
+            
             int filmID =
                 int.Parse(filmUrl.Substring(0, filmUrl.IndexOf("-", StringComparison.Ordinal)));
 

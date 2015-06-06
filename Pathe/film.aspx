@@ -24,7 +24,8 @@
         </div>
         <div class="col-lg-4">
             <div class="well movie_extra">
-                Extra info
+                <strong>Release Date</strong> <asp:Label ID="lblRelease" runat="server" Text="Onbekend"></asp:Label><br/>
+                <asp:Label runat="server" ID="lblKijkwijzer" Text="Kijkwijzer"></asp:Label>
             </div>
             
         </div>

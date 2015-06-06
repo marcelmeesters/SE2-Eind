@@ -37,3 +37,9 @@ h4.movie_title {
     display: inline-block;
     vertical-align: top;
 }
+
+img.kijkwijzer {
+    margin-right: 3px;
+    width: 30px;
+    height: 30px;
+}

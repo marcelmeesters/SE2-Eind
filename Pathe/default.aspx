@@ -13,8 +13,8 @@
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Animal Shelter</h1>
-        <p>Welkom op animal Shelter :D<br>
+        <h1>Pathé</h1>
+        <p>Welkom bij Pathé bioscopen<br>
             
             <asp:LoginView ID="LoginView1" runat="server">
               <AnonymousTemplate>
