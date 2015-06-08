@@ -27,6 +27,7 @@ namespace Pathe
             routes.MapPageRoute("userProfile", "User/Me", "~/profile.aspx");
             routes.MapPageRoute("userLogin", "Login", "~/login.aspx");
             routes.MapPageRoute("userCreate", "Register", "~/register.aspx");
+            routes.MapPageRoute("userLogout", "Logout", "~/logout.aspx");
 
 
             // Admin routes

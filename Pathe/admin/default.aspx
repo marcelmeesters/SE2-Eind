@@ -1,11 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="Pathe.admin._default" %>
-<%@ Import Namespace="System.IO" %>
-<!DOCTYPE html>
-<html lang="en">
-<!--#include file="/inc/header.aspx"-->
-<body role="document">
-<!--#include file="inc/menu.aspx"-->
-<div class="container">
+﻿<%@ Page Title="Pathé - Admin" MasterPageFile="~/inc/Pathe_admin.master" Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="Pathe.admin._default" %>
+<asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >
     
     <form id="form1" runat="server">
         <div class="container">
@@ -15,8 +9,4 @@
         </div>
     </form>
 
-</div>
-<!--#include file="/inc/js.aspx"-->
-</body>
-</html>
-
+</asp:Content>

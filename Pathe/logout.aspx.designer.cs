@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pathe.inc {
+namespace Pathe {
     
     
-    public partial class menu {
+    public partial class logout {
     }
 }
