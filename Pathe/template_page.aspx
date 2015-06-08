@@ -1,21 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="template_page.aspx.cs" Inherits="Pathe.template_page" %>
-<%@ Import Namespace="System.IO" %>
-<!DOCTYPE html>
-<html lang="en">
-<!--#include file="inc/header.aspx"-->
-<body role="document">
-<!--#include file="inc/menu.aspx"-->
-<div class="container">
-    
-    <form id="form1" runat="server">
-        <div class="container">
-            <strong>Action: </strong><%= Page.RouteData.Values["action"] %><br/>
-            <strong>Film: </strong><%= Page.RouteData.Values["film"] %><br/>
-            <strong>Vars: </strong><%= Page.RouteData.Values["vars"] %>
-        </div>
-    </form>
-
-</div>
-<!--#include file="inc/js.aspx"-->
-</body>
-</html>
+﻿<%@ Page Title="Template" Language="C#" MasterPageFile="~/inc/Pathe_user.Master" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadPlaceholder" Runat="Server">
+    Header stuff
+</asp:Content>
+<asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >
+    Main content
+</asp:Content>

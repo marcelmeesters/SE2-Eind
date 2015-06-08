@@ -1,10 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="films.aspx.cs" Inherits="Pathe.films" %>
-<!DOCTYPE html>
-<html lang="en">
-<!--#include file="inc/header.aspx"-->
-<body role="document">
-<!--#include file="inc/menu.aspx"-->
-<div class="container">
+﻿<%@ Page Title="Pathé - Films" Language="C#" MasterPageFile="~/inc/Pathe_user.Master" CodeBehind="films.aspx.cs" Inherits="Pathe.films" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadPlaceholder" Runat="Server">
+</asp:Content>
+<asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >
+    <form id="FilmsForm" runat="server">
     <div class="jumbotron">
         <h1>Film overzicht</h1>
         <p><strong>Action: </strong><%= Page.RouteData.Values["action"] %><br/>
@@ -46,8 +44,5 @@
         </div>
     </div>
     <asp:SqlDataSource ID="FilmsDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString2 %>" ProviderName="<%$ ConnectionStrings:ConnectionString2.ProviderName %>" SelectCommand="SELECT * FROM FILM f ORDER BY f.Titel"></asp:SqlDataSource>
-
-</div>
-<!--#include file="inc/js.aspx"-->
-</body>
-</html>
+        </form>
+</asp:Content>

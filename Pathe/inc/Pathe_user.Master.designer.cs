@@ -7,90 +7,72 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pathe {
+namespace Pathe.inc {
     
     
-    public partial class films {
+    public partial class Pathe_user {
         
         /// <summary>
-        /// FilmsForm control.
+        /// HeadPlaceholder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm FilmsForm;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadPlaceholder;
         
         /// <summary>
-        /// btnSortTitle control.
+        /// AdminMenuFilms control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnSortTitle;
+        protected global::System.Web.UI.WebControls.LoginView AdminMenuFilms;
         
         /// <summary>
-        /// btnSortDate control.
+        /// AdminMenuBlog control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnSortDate;
+        protected global::System.Web.UI.WebControls.LoginView AdminMenuBlog;
         
         /// <summary>
-        /// btnSortDuration control.
+        /// AdminMenuUsers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnSortDuration;
+        protected global::System.Web.UI.WebControls.LoginView AdminMenuUsers;
         
         /// <summary>
-        /// btnSortId control.
+        /// AdminMenuStaff control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnSortId;
+        protected global::System.Web.UI.WebControls.LoginView AdminMenuStaff;
         
         /// <summary>
-        /// btnAsc control.
+        /// LoginViewMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnAsc;
+        protected global::System.Web.UI.WebControls.LoginView LoginViewMenu;
         
         /// <summary>
-        /// btnDesc control.
+        /// ContentPlaceholder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnDesc;
-        
-        /// <summary>
-        /// Repeater1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater1;
-        
-        /// <summary>
-        /// FilmsDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource FilmsDataSource;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceholder;
     }
 }

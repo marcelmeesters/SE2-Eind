@@ -1,15 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="Pathe.index" %>
-<%@ Import Namespace="System.IO" %>
-<!DOCTYPE html>
-<html lang="en">
-<!--#include file="inc/header.aspx"-->
-
-  <body role="document">
-
-      <form id="form1" runat="server">
-
-    <!--#include file="inc/menu.aspx"-->
-    <div class="container theme-showcase" role="main">
+﻿<%@ Page Title="Pathé" Language="C#" MasterPageFile="~/inc/Pathe_user.Master" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadPlaceholder" Runat="Server">
+</asp:Content>
+<asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
@@ -580,12 +572,4 @@
       </div>
 
 
-    </div> <!-- /container -->
-
-<!--#include file="inc/js.aspx"-->
-    
-      </form>
-    
-  </body>
-</html>
-
+</asp:Content>

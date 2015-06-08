@@ -1,12 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="film.aspx.cs" Inherits="Pathe.film" %>
-<%@ Import Namespace="System.IO" %>
-<% if((string) Page.RouteData.Values["film"] == "none") Response.Redirect("/Films"); %>
-<!DOCTYPE html>
-<html lang="en">
-<!--#include file="inc/header.aspx"-->
-<body role="document">
-<!--#include file="inc/menu.aspx"-->
-<div class="container">
+﻿<%@ Page Title="Film - " MasterPageFile="~/inc/Pathe_user.Master" Language="C#" AutoEventWireup="true" CodeBehind="film.aspx.cs" Inherits="Pathe.film" %>
+<asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >
     <form id="filminfo" runat="server">
     <div class="jumbotron">
         <h1><asp:Label ID="lblTitle" runat="server" Text="Label"></asp:Label></h1>
@@ -31,7 +24,4 @@
         </div>
     </div>
     </form>
-</div>
-<!--#include file="inc/js.aspx"-->
-</body>
-</html>
+</asp:Content>

@@ -85,9 +85,8 @@
     <Content Include="fonts\RobotoDraftMedium.woff2" />
     <Content Include="fonts\RobotoDraftRegular.woff" />
     <Content Include="fonts\RobotoDraftRegular.woff2" />
-    <None Include="web.sitemap">
-      <SubType>Designer</SubType>
-    </None>
+    <Content Include="inc\Pathe_user.Master" />
+    <Content Include="inc\Pathe_admin.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -113,6 +112,7 @@
     <Content Include="inc\js.aspx" />
     <Content Include="inc\menu.aspx" />
     <Content Include="default.aspx" />
+    <Content Include="inc\User Controls\footer.ascx" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\holder.min.js" />
@@ -205,6 +205,20 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="inc\Pathe_user.Master.cs">
+      <DependentUpon>Pathe_user.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="inc\Pathe_user.Master.designer.cs">
+      <DependentUpon>Pathe_user.Master</DependentUpon>
+    </Compile>
+    <Compile Include="inc\User Controls\footer.ascx.cs">
+      <DependentUpon>footer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="inc\User Controls\footer.ascx.designer.cs">
+      <DependentUpon>footer.ascx</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>

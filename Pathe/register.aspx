@@ -1,25 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="register.aspx.cs" Inherits="Pathe.register" %>
-<%@ Import Namespace="System.IO" %>
-<!DOCTYPE html>
-<html lang="en">
-<!--#include file="inc/header.aspx"-->
-<body role="document">
-<!--#include file="inc/menu.aspx"-->
-<div class="container">
+﻿<%@ Page Title="Pathé - Login" Language="C#" MasterPageFile="~/inc/Pathe_user.Master" CodeBehind="register.aspx.cs" Inherits="Pathe.register"%>
+<asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >
     <div class="row">
-        <form id="registerform" runat="server">
-            
-            <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" MembershipProvider="OracleProvider">
-                <WizardSteps>
-                    <asp:CreateUserWizardStep runat="server" />
-                    <asp:CompleteWizardStep runat="server" />
-                </WizardSteps>
-            </asp:CreateUserWizard>
-            
-        </form>
+        <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" MembershipProvider="OracleProvider">
+            <WizardSteps>
+                <asp:CreateUserWizardStep runat="server" />
+                <asp:CompleteWizardStep runat="server" />
+            </WizardSteps>
+        </asp:CreateUserWizard>
     </div>
-</div> <!-- /container -->
-
-<!--#include file="inc/js.aspx"-->
-</body>
-</html>
+</asp:Content>

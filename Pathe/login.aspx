@@ -1,13 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="Pathe.login" %>
-<%@ Import Namespace="System.IO" %>
-<!DOCTYPE html>
-<html lang="en">
-<!--#include file="inc/header.aspx"-->
-<body role="document">
-<!--#include file="inc/menu.aspx"-->
-<div class="container">
+﻿<%@ Page Title="Pathé - Login" Language="C#" MasterPageFile="~/inc/Pathe_user.Master" CodeBehind="login.aspx.cs" Inherits="Pathe.login"%>
+<asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >
     <div class="row">
-        <form id="loginform" runat="server">
+        <form runat="server" ID="loginForm">
             <asp:Login ID="Login2" runat="server" CreateUserUrl="register.aspx" CssClass="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12" PasswordRecoveryUrl="forgot.aspx" DestinationPageUrl="default.aspx" FailureText="De ingevoerde gegevens zijn niet bekend. Probeer het nogmaals." RememberMeSet="True">
                 <LayoutTemplate>
                     <div class="well">
@@ -33,8 +27,4 @@
             </asp:Login>
         </form>
     </div>
-</div> <!-- /container -->
-
-<!--#include file="inc/js.aspx"-->
-</body>
-</html>
+</asp:Content>

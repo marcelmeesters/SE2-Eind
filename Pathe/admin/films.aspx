@@ -1,10 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="films.aspx.cs" Inherits="Pathe.admin.films" %>
-<!DOCTYPE html>
-<html lang="en">
-<!--#include file="/inc/header.aspx"-->
-<body role="document">
-<!--#include file="inc/menu.aspx"-->
-<div class="container">
+﻿<%@ Page Title="Pathé - Films" Language="C#" MasterPageFile="~/inc/Pathe_admin.master" CodeBehind="films.aspx.cs" Inherits="Pathe.admin.films" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadPlaceholder" Runat="Server">
+</asp:Content>
+<asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >
+    <form id="FilmsForm" runat="server">
     <div class="jumbotron">
         <h1>Film overzicht</h1>
         <p><strong>Action: </strong><%= Page.RouteData.Values["action"] %><br/>
@@ -14,15 +12,15 @@
         <div class="col-lg-3">
             <div class="well" runat="server">
                 <h3>Sorteer Op</h3><br/>
-                    <a runat="server" id="btnSortTitle" href="/Admin/Films/List/" class="btn btn-primary btn-small">Titel</a><br/>
-                    <a runat="server" id="btnSortDate" href="/Admin/Films/List/" class="btn btn-primary btn-small">Release Date</a><br/>
-                    <a runat="server" id="btnSortDuration" href="/Admin/Films/List/" class="btn btn-primary btn-small">Duur</a><br/>
-                    <a runat="server" id="btnSortId" href="/Admin/Films/List/" class="btn btn-primary btn-small">Film ID</a><br/>
+                    <a runat="server" id="btnSortTitle" href="/Films" class="btn btn-primary btn-small">Titel</a><br/>
+                    <a runat="server" id="btnSortDate" href="/Films" class="btn btn-primary btn-small">Release Date</a><br/>
+                    <a runat="server" id="btnSortDuration" href="/Films" class="btn btn-primary btn-small">Duur</a><br/>
+                    <a runat="server" id="btnSortId" href="/Films" class="btn btn-primary btn-small">Film ID</a><br/>
                 
                 
                 <h3>Volgorde</h3><br/>
-                    <a runat="server" id="btnAsc" href="/Admin/Films/List/" class="btn btn-primary btn-small">Oplopend</a><br/>
-                    <a runat="server" id="btnDesc" href="/Admin/Films/List/" class="btn btn-primary btn-small">Aflopend</a><br/>
+                    <a runat="server" id="btnAsc" href="/Films" class="btn btn-primary btn-small">Oplopend</a><br/>
+                    <a runat="server" id="btnDesc" href="/Films" class="btn btn-primary btn-small">Aflopend</a><br/>
 
             </div>
         </div>
@@ -46,8 +44,5 @@
         </div>
     </div>
     <asp:SqlDataSource ID="FilmsDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString2 %>" ProviderName="<%$ ConnectionStrings:ConnectionString2.ProviderName %>" SelectCommand="SELECT * FROM FILM f ORDER BY f.Titel"></asp:SqlDataSource>
-
-</div>
-<!--#include file="/inc/js.aspx"-->
-</body>
-</html>
+        </form>
+</asp:Content>
