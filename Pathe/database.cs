@@ -231,8 +231,8 @@ namespace Pathe
         public bool SetPrimaryImage(int filmId, string fileName)
         {
             OracleCommand cmd = new OracleCommand("UPDATE FILM SET AFBEELDING=:image WHERE FILMID=:filmID");
-            cmd.Parameters.Add("filmID", filmId);
             cmd.Parameters.Add("image", fileName);
+            cmd.Parameters.Add("filmID", filmId);
 
             return Execute(cmd);
         }
