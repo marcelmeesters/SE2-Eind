@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -75,10 +76,7 @@ namespace Pathe
 
         public string KijkwijzerString
         {
-            get
-            {
-                return kijkWijzers.Aggregate("", (current, kw) => current + (kw + ","));
-            }
+            get { return GetKijwijzerString(KijkWijzers); }
         }
 
         public string UrlString
@@ -115,7 +113,31 @@ namespace Pathe
             return FilmId;
         }
 
+        /// <summary>
+        /// Convert a comma-separated list of kijkwijzer ratings to a list of Kijkwijzer objects (Enum)
+        /// </summary>
+        /// <param name="kwString">comma separated list</param>
+        /// <returns>List(Kijkwijzer)</returns>
+        public List<Kijkwijzer> GetKijkwijzers(string kwString)
+        {
+            Kijkwijzer temp = Kijkwijzer.Al;
+            return (from kw in kwString.Split(',') where Enum.TryParse(kw, out temp) select temp).ToList();
+        }
+
+        /// <summary>
+        /// Converts a list of Kijkwijzer objects to a comma-separated list
+        /// </summary>
+        /// <param name="kws">List(Kijkwijzer)</param>
+        /// <returns>comma-separated string</returns>
+        public string GetKijwijzerString(List<Kijkwijzer> kws)
+        {
+            string returned = kws.Aggregate("", (current, kw) => current + (kw.ToString() + ","));
+
+            return returned.TrimEnd(',');
+        }
+
         #endregion
+        
     }
 
     internal enum Kijkwijzer

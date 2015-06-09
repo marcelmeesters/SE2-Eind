@@ -9,10 +9,14 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="well movie_info">
-                <img src="holder.js/175x250" />
-                <p>
-                    <asp:Label ID="lblDescription" runat="server" Text="Label"></asp:Label>
-                </p>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img src="holder.js/175x250" class="movie_poster" runat="server" ID="imgPoster"/>
+                    </div>
+                    <div class="col-lg-8">
+                        <asp:Label ID="lblDescription" runat="server" Text="Label"></asp:Label>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-lg-4">

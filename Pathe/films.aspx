@@ -30,6 +30,7 @@
                 <ItemTemplate>
                     <a href="/Film/<%# Eval("FilmID") %>-<%# FormatTitleUrl( Eval("Titel")) %>">
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <img id="imgPoster" src="/img/upload/<%# Eval("FilmID") %>/<%# Eval("Afbeelding") %>" class="movie_poster_overview"/>
                             <div class="well ">
                                 <div class="movie_info">
                                     <h4 class="movie_title"><%# Eval("Titel") %></h4>

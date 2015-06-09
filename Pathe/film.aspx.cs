@@ -77,13 +77,14 @@ namespace Pathe
                 filmInfo["BESCHRIJVING"].ToString(),
                 Convert.ToInt32(filmInfo["DUUR"]),
                 new DateTime(releaseYear, releaseMonth, releaseDay),
-                filmInfo["KIJKWIJZER"].ToString()
+                filmInfo["KIJKWIJZER"].ToString(),
+                filmInfo["AFBEELDING"].ToString()
                 );
 
             lblDescription.Text = thisFilm.Description;
             lblTitle.Text = thisFilm.Title;
             lblRelease.Text = thisFilm.Release.ToShortDateString();
-
+            imgPoster.Src = "/img/upload/" + thisFilm.FilmId + "/" + thisFilm.PrimaryImage;
 
             lblKijkwijzer.Text = thisFilm.KijkwijzerStringImg;
         }

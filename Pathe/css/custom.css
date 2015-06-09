@@ -33,6 +33,11 @@ h4.movie_title {
     display: inline-block;
 }
 
+.movie_poster_overview {
+    width: 100%;
+    max-height: 266px;
+}
+
 .movie_info p {
     display: inline-block;
     vertical-align: top;
