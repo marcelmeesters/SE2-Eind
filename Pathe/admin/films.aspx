@@ -5,8 +5,7 @@
     <form id="FilmsForm" runat="server">
     <div class="jumbotron">
         <h1>Film overzicht</h1>
-        <p><strong>Action: </strong><%= Page.RouteData.Values["action"] %><br/>
-            <strong>Page: </strong><%= Page.RouteData.Values["page"] %><br/></p>
+        <p></p>
     </div>
     <div class="row">
         <div class="col-lg-3">

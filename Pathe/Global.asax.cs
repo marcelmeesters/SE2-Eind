@@ -43,8 +43,10 @@ namespace Pathe
             routes.MapPageRoute("adminFilm", "Admin/Film/{film}/{action}", "~/admin/film.aspx", true,
                 new RouteValueDictionary { { "action", "show" }, { "film", "none" } });
 
-            routes.MapPageRoute("adminCinema", "Admin/Cinema/{action}/{cinema}", "~/admin/cinemas.aspx", true,
-                new RouteValueDictionary {{"action", "list"}, {"cinema", "none"}});
+            routes.MapPageRoute("adminCinemas", "Admin/Cinemas/{*vars}", "~/admin/cinemas.aspx");
+
+            routes.MapPageRoute("adminCinema", "Admin/Cinema/{cinema}/{action}", "~/admin/cinema.aspx", true,
+                new RouteValueDictionary {{"action", "show"}, {"cinema", "none"}});
 
             routes.MapPageRoute("adminUsers", "Admin/Users/{action}/{user}", "~/admin/users.aspx", true,
                 new RouteValueDictionary {{"action", "list"}, {"user", "none"}});

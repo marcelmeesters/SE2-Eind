@@ -52,7 +52,13 @@
                     <RoleGroups>
                         <asp:RoleGroup Roles="GlobalAdmin,FilmAdmin">
                             <ContentTemplate>
-                                <li id="menu_films"><a href="/Admin/Films/List">Films</a></li>
+                                <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Films<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li id="menu_films"><a href="/Admin/Films/List">Overzicht</a></li>
+                                    <li id="menu_filmAdd"><a href="/Admin/Films/Add">Nieuwe Film</a></li>
+                                </ul>
+                                </li>
                                 <li id="menu_bioscopen"><a href="/Admin/Cinema">Bioscopen</a></li>
                                 <li id="menu_agenda"><a href="/Admin/Agenda">Bioscoopagenda</a></li>
                             </ContentTemplate>
