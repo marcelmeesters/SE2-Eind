@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -81,12 +82,83 @@ namespace Pathe.admin
                 filmInfo["AFBEELDING"].ToString()
                 );
 
-            lblDescription.Text = thisFilm.Description;
-            lblTitle.Text = thisFilm.Title;
-            lblRelease.Text = thisFilm.Release.ToShortDateString();
-            imgPoster.Src = "/img/upload/" + thisFilm.FilmId + "/" + thisFilm.PrimaryImage;
+            txtTitel.Value = thisFilm.Title;
+            txtDescription.Value = thisFilm.Description;
+            numDuur.Value = Convert.ToString(thisFilm.Duration);
+            datRelease.Value = thisFilm.Release.ToString("dd-MMM-yyyy");
 
-            lblKijkwijzer.Text = thisFilm.KijkwijzerStringImg;
+            kw_Al.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Al);
+            kw_zes.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Zes);
+            kw_negen.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Negen);
+            kw_twaalf.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Twaalf);
+            kw_zestien.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Zestien);
+            kw_geweld.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Geweld);
+            kw_angst.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Angst);
+            kw_seks.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Seks);
+            kw_discriminatie.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Discriminatie);
+            kw_drugsalcohol.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Drugsalcohol);
+            kw_taalgebruik.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Taalgebruik);
+
+        }
+
+        protected void btnAddFilm_OnClick(object sender, EventArgs e)
+        {
+            Database db = Database.Instance;
+            string titel = txtTitel.Value;
+            string description = txtDescription.Value;
+            List<string> images = new List<string>();
+
+            DateTime releasedate = Convert.ToDateTime(datRelease.Value);
+            int duur = Convert.ToInt32(numDuur.Value);
+            List<Kijkwijzer> kwList = new List<Kijkwijzer>();
+
+            if (kw_Al.Checked) kwList.Add(Kijkwijzer.Al);
+            if (kw_zes.Checked) kwList.Add(Kijkwijzer.Zes);
+            if (kw_negen.Checked) kwList.Add(Kijkwijzer.Negen);
+            if (kw_twaalf.Checked) kwList.Add(Kijkwijzer.Twaalf);
+            if (kw_zestien.Checked) kwList.Add(Kijkwijzer.Zestien);
+            if (kw_geweld.Checked) kwList.Add(Kijkwijzer.Geweld);
+            if (kw_angst.Checked) kwList.Add(Kijkwijzer.Angst);
+            if (kw_seks.Checked) kwList.Add(Kijkwijzer.Seks);
+            if (kw_discriminatie.Checked) kwList.Add(Kijkwijzer.Discriminatie);
+            if (kw_drugsalcohol.Checked) kwList.Add(Kijkwijzer.Drugsalcohol);
+            if (kw_taalgebruik.Checked) kwList.Add(Kijkwijzer.Taalgebruik);
+
+
+            Film temp = new Film(0, titel, description, duur, releasedate, kwList);
+            int newID = temp.Create();
+            try
+            {
+                Directory.CreateDirectory(Server.MapPath("~\\img\\upload\\") + newID);
+
+                if (imgPoster.PostedFile != null && imgPoster.PostedFile.ContentLength > 0)
+                {
+                    var file = Request.Files[0];
+                    images.Add(file.FileName);
+
+                    if (Regex.IsMatch(file.FileName, @"^(.*\.)((jpg)|(jpeg)|(png)|(gif))$"))
+                    {
+                        string saveAs = Server.MapPath("~\\img\\upload\\") + newID + "\\" + file.FileName;
+                        file.SaveAs(saveAs);
+
+                        temp.PrimaryImage = file.FileName;
+                        db.SetPrimaryImage(newID, file.FileName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
+
+
+            /*lblStatus.Text = (newID == 0)
+                ? string.Format(failString, "Oeps!",
+                    "Er is iets fout gegaan bij het toevoegen van de film. Probeer het nogmaals.")
+                : string.Format(successString, "Film toegevoegd",
+                    "De film is toegevoegd. <strong><a href='/Admin/Film/" + temp.UrlString + "'> ID " + newID +
+                    "</a></strong>");
+             * */
         }
     }
 }
