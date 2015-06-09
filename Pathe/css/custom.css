@@ -27,7 +27,7 @@ h4.movie_title {
     height: 3em;
 }
 
-.movie_info img{
+.movie_poster{
     width: 175px;
     height: 250px;
     display: inline-block;

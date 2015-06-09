@@ -80,12 +80,14 @@ namespace Pathe.admin
                 filmInfo["KIJKWIJZER"].ToString()
                 );
 
+            SqlImageSource1.SelectCommand = "SELECT * FROM FILM_IMAGE WHERE FILMID = " + thisFilm.FilmId;
+
             lblDescription.Text = thisFilm.Description;
             lblTitle.Text = thisFilm.Title;
             lblRelease.Text = thisFilm.Release.ToShortDateString();
 
 
-            lblKijkwijzer.Text = thisFilm.KijkwijzerString;
+            lblKijkwijzer.Text = thisFilm.KijkwijzerStringImg;
         }
     }
 }

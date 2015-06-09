@@ -85,7 +85,7 @@ namespace Pathe
             lblRelease.Text = thisFilm.Release.ToShortDateString();
 
 
-            lblKijkwijzer.Text = thisFilm.KijkwijzerString;
+            lblKijkwijzer.Text = thisFilm.KijkwijzerStringImg;
         }
     }
 }

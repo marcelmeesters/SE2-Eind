@@ -71,20 +71,19 @@ namespace Pathe
         /// Try to open the connection with the database
         /// </summary>
         /// <returns>Returns a bool, true = connection success, false = connection failed</returns>
-        public bool Open_Connection()
+        public void Open_Connection()
         {
             try
             {
                 System.Diagnostics.Debug.WriteLine("Opening Database Connection");
                 connect.Open();
-                return true;
             }
             catch (OracleException ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex);
                 if (ex.Message == "Connection is already open")
                 {
-                    return false;
+                    return;
                 }
                 throw;
             }
@@ -155,23 +154,73 @@ namespace Pathe
             return ExecuteQuery(cmd);
         }
 
+        public List<Dictionary<string, object>> GetFilmImages(int filmID)
+        {
+            OracleCommand cmd = new OracleCommand("SELECT * FORM FILM_IMAGE WHERE FILMID = :filmID");
+            cmd.Parameters.Add("filmID", filmID);
+
+            return ExecuteQuery(cmd);
+
+        } 
+
         #endregion
 
         #region Methods - Insert
 
-        /// <summary>
-        /// Adds a new group to the database
-        /// </summary>
-        /// <param name="locID">Location used by the group</param>
-        /// <param name="paid">whether the group has paid or not</param>
-        /// <returns>true if success, false if not</returns>
-        public bool CreateGroup(int locID, int paid)
+        public List<Dictionary<string, object>> Createfilm(string titel, string releaseDate, int duur, string kijkwijzers, string beschrijving)
         {
-            OracleCommand cmd = new OracleCommand("INSERT INTO EVENTGROUP VALUES (NULL, :locID, :paid, 1)");
-            cmd.Parameters.Add(new OracleParameter("locID", locID));
-            cmd.Parameters.Add(new OracleParameter("paid", paid));
+            try
+            {
+                OracleCommand cmd =
+                    new OracleCommand(
+                        "INSERT INTO FILM VALUES (NULL, :titel, :releaseDate, :duur, :kijkwijzer, :beschrijving)");
 
-            return Execute(cmd);
+                cmd.Parameters.Add("titel", titel);
+                cmd.Parameters.Add("releaseDate", releaseDate);
+                cmd.Parameters.Add("duur", duur);
+                cmd.Parameters.Add("kijkwijzer", kijkwijzers);
+                cmd.Parameters.Add("beschrijving", beschrijving);
+
+                if (!Execute(cmd)) return null;
+                OracleCommand cmdId = new OracleCommand("SELECT MAX(FILMID) as id FROM FILM");
+                return ExecuteQuery(cmdId);
+            }
+            catch (OracleException ex)
+            {
+                return new List<Dictionary<string, object>>
+                {
+                    new Dictionary<string, object> {{"Error", ex.ErrorCode}}
+                };
+            }
+        }
+
+        /// <summary>
+        /// Insert images associated with a film into the database
+        /// </summary>
+        /// <param name="filmID">FilmID that the images are associated to</param>
+        /// <param name="images">List of file names</param>
+        public bool AddFilmImages(int filmID, List<string> images)
+        {
+            List<OracleCommand> cmds = new List<OracleCommand>();
+            foreach (string image in images)
+            {
+                try
+                {
+                    OracleCommand cmd = new OracleCommand("INSERT INTO FILM_IMAGE VALUES(:filmID, :image)");
+
+                    cmd.Parameters.Add("filmID", filmID);
+                    cmd.Parameters.Add("image", image);
+
+                    cmds.Add(cmd);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex);
+                    return false;
+                }
+            }
+
+            return Execute(cmds);
         }
 
         #endregion
@@ -239,14 +288,23 @@ namespace Pathe
         public bool Execute(OracleCommand cmd)
         {
             System.Diagnostics.Debug.WriteLine("---------------");
-            System.Diagnostics.Debug.WriteLine("Attempting to execute query: {0}", cmd.ToString());
+            System.Diagnostics.Debug.WriteLine("Attempting to execute query: " + cmd.CommandText);
             try
             {
-                if (!Open_Connection()) throw new Exception("Could not connect to database");
-
+                Open_Connection();
+                cmd.Connection = connect;
                 cmd.ExecuteNonQuery();
                 System.Diagnostics.Debug.WriteLine("COMPLETE");
                 return true;
+            }
+            catch (OracleException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("---------- ERROR WHILE EXECUTING QUERY ----------");
+                System.Diagnostics.Debug.WriteLine("Error while executing query: " + cmd.CommandText);
+                System.Diagnostics.Debug.WriteLine("Error code: {0}", ex.ErrorCode);
+                System.Diagnostics.Debug.WriteLine("Error message: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine("---------- END OF EXCEPTION ----------");
+                throw;
             }
             finally
             {
@@ -255,32 +313,74 @@ namespace Pathe
         }
 
         /// <summary>
-        /// Executes query and returns the result in a processable format. MySqlExceptions will be had.
+        /// Executes a list of queries that will insert, update or delete records in a database
+        /// </summary>
+        /// <returns>
+        /// Returns true if successfull, false if not
+        /// </returns>
+        public bool Execute(List<OracleCommand> cmds)
+        {
+            try
+            {
+                Open_Connection();
+
+                foreach (OracleCommand cmd in cmds)
+                {
+                    try
+                    {
+                        System.Diagnostics.Debug.WriteLine("---------------");
+                        System.Diagnostics.Debug.WriteLine("Attempting to execute query: " + cmd.CommandText);
+
+                        cmd.Connection = connect;
+                        cmd.ExecuteNonQuery();
+                        System.Diagnostics.Debug.WriteLine("COMPLETE");
+                    }
+                    catch (OracleException ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("---------- ERROR WHILE EXECUTING QUERY ----------");
+                        System.Diagnostics.Debug.WriteLine("Error while executing query: " + cmd.CommandText);
+                        System.Diagnostics.Debug.WriteLine("Error code: {0}", ex.ErrorCode);
+                        System.Diagnostics.Debug.WriteLine("Error message: " + ex.Message);
+                        System.Diagnostics.Debug.WriteLine("---------- END OF EXCEPTION ----------");
+                        throw;
+                    }
+                }
+            }
+            finally
+            {
+                Close_Connection();
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Executes query and returns the result in a processable format. SqlExceptions will be had.
         /// </summary>
         /// <returns>List&lt;Dictionary&lt;&lt;fieldName, value&gt;&gt; or null on failure</returns>
         public List<Dictionary<string, object>> ExecuteQuery(OracleCommand cmd)
         {
             List<Dictionary<string, object>> result = new List<Dictionary<string, object>>();
             System.Diagnostics.Debug.WriteLine("---------------");
-            System.Diagnostics.Debug.WriteLine("Attempting to execute query: {0}", cmd.ToString());
+            System.Diagnostics.Debug.WriteLine("Attempting to execute query: " + cmd.CommandText);
             try
             {
-                if (!Open_Connection()) throw new Exception("Could not connect to database");
+                Open_Connection();
 
                 cmd.Connection = connect;
 
-                OracleDataReader resultReader = cmd.ExecuteReader();
-
-                //loop through the rows and add them to the result
-                while (resultReader.Read())
+                using (OracleDataReader resultReader = cmd.ExecuteReader())
                 {
-                    Dictionary<string, object> row = new Dictionary<string, object>();
+                    //loop through the rows and add them to the result
+                    while (resultReader.Read())
+                    {
+                        Dictionary<string, object> row = new Dictionary<string, object>();
 
-                    //loop through the fields and add them to the row
-                    for (int fieldId = 0; fieldId < resultReader.FieldCount; fieldId++)
-                        row.Add(resultReader.GetName(fieldId), resultReader.GetValue(fieldId));
+                        //loop through the fields and add them to the row
+                        for (int fieldId = 0; fieldId < resultReader.FieldCount; fieldId++)
+                            row.Add(resultReader.GetName(fieldId), resultReader.GetValue(fieldId));
 
-                    result.Add(row);
+                        result.Add(row);
+                    }
                 }
                 System.Diagnostics.Debug.WriteLine("COMPLETE");
                 return result;
@@ -288,7 +388,7 @@ namespace Pathe
             catch (OracleException ex)
             {
                 System.Diagnostics.Debug.WriteLine("---------- ERROR WHILE EXECUTING QUERY ----------");
-                System.Diagnostics.Debug.WriteLine("Error while executing query: {0}", cmd.ToString());
+                System.Diagnostics.Debug.WriteLine("Error while executing query: {0}", cmd.CommandText);
                 System.Diagnostics.Debug.WriteLine("Error code: {0}", ex.ErrorCode);
                 System.Diagnostics.Debug.WriteLine("Error message: {0}", ex.Message);
                 System.Diagnostics.Debug.WriteLine("---------- END OF EXCEPTION ----------");

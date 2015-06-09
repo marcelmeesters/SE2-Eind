@@ -129,5 +129,8 @@
         <% string pageName = Path.GetFileNameWithoutExtension(Page.AppRelativeVirtualPath); %>
         $("#menu_<%=pageName%>").addClass("active");
     </script> 
+    <asp:ContentPlaceHolder runat="server" ID="ScriptsPlaceholder">
+        
+    </asp:ContentPlaceHolder>
 </body>
 </html>

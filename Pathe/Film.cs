@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Pathe
@@ -35,6 +36,17 @@ namespace Pathe
             }
         }
 
+        public Film(int filmId, string title, string description, int duration, DateTime release, List<Kijkwijzer> kws, List<string> images = null)
+        {
+            FilmId = filmId;
+            Title = title;
+            Description = description;
+            Duration = duration;
+            Release = release;
+            Images = images;
+            kijkWijzers = kws;
+        }
+
         #endregion
 
         #region Properties
@@ -50,7 +62,7 @@ namespace Pathe
             get { return kijkWijzers; }
         }
 
-        public string KijkwijzerString
+        public string KijkwijzerStringImg
         {
             get
             {
@@ -58,9 +70,45 @@ namespace Pathe
             }
         }
 
+        public string KijkwijzerString
+        {
+            get
+            {
+                return kijkWijzers.Aggregate("", (current, kw) => current + (kw + ","));
+            }
+        }
+
+        public string UrlString
+        {
+            get
+            {
+                return FilmId + "-" + Regex.Replace(Title.Replace(" ", "-"), "[^a-zA-Z0-9-]+", "");
+            }
+        }
+
+        public List<string> Images { get; set; }
+
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Adds this film to the database, and returns the new ID
+        /// </summary>
+        /// <returns></returns>
+        public int Create()
+        {
+            try
+            {
+                string release = Release.ToString("dd-MMM-yy");
+                FilmId = Convert.ToInt32(db.Createfilm(Title, release, Duration, KijkwijzerString, Description)[0]["ID"]);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+            return FilmId;
+        }
 
         #endregion
     }
