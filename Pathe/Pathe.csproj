@@ -142,7 +142,6 @@
     <Content Include="register.aspx" />
     <Content Include="roles.aspx" />
     <Content Include="template.aspx" />
-    <None Include="todo.md" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
