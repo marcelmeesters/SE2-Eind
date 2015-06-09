@@ -55,6 +55,8 @@ namespace Pathe.admin
             Film temp = new Film(0, titel, description, duur, releasedate, kwList);
             int newID = temp.Create();
 
+            /* UPLOAD MULTIPLE IMAGES
+             * NOT QUITE YET DONE 
             try
             {
                 Directory.CreateDirectory(Server.MapPath("~\\img\\upload\\") + newID);
@@ -82,6 +84,32 @@ namespace Pathe.admin
             {
                 System.Diagnostics.Debug.WriteLine(ex);
             }
+            */
+
+            try
+            {
+                Directory.CreateDirectory(Server.MapPath("~\\img\\upload\\") + newID);
+
+                if (imgPoster.PostedFile != null && imgPoster.PostedFile.ContentLength > 0)
+                {
+                    var file = Request.Files[0];
+                    images.Add(file.FileName);
+
+                    if (Regex.IsMatch(file.FileName, @"^(.*\.)((jpg)|(jpeg)|(png)|(gif))$"))
+                    {
+                        string saveAs = Server.MapPath("~\\img\\upload\\") + newID + "\\" + file.FileName;
+                        file.SaveAs(saveAs);
+
+                        temp.PrimaryImage = file.FileName;
+                        db.SetPrimaryImage(newID, file.FileName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
+
 
             lblStatus.Text = (newID == 0)
                 ? string.Format(failString, "Oeps!",

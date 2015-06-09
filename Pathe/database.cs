@@ -167,19 +167,20 @@ namespace Pathe
 
         #region Methods - Insert
 
-        public List<Dictionary<string, object>> Createfilm(string titel, string releaseDate, int duur, string kijkwijzers, string beschrijving)
+        public List<Dictionary<string, object>> Createfilm(string titel, string releaseDate, int duur, string kijkwijzers, string beschrijving, string image)
         {
             try
             {
                 OracleCommand cmd =
                     new OracleCommand(
-                        "INSERT INTO FILM VALUES (NULL, :titel, :releaseDate, :duur, :kijkwijzer, :beschrijving)");
+                        "INSERT INTO FILM VALUES (NULL, :titel, :releaseDate, :duur, :kijkwijzer, :beschrijving, :image)");
 
                 cmd.Parameters.Add("titel", titel);
                 cmd.Parameters.Add("releaseDate", releaseDate);
                 cmd.Parameters.Add("duur", duur);
                 cmd.Parameters.Add("kijkwijzer", kijkwijzers);
                 cmd.Parameters.Add("beschrijving", beschrijving);
+                cmd.Parameters.Add("image", image);
 
                 if (!Execute(cmd)) return null;
                 OracleCommand cmdId = new OracleCommand("SELECT MAX(FILMID) as id FROM FILM");
@@ -227,32 +228,11 @@ namespace Pathe
 
         #region Methods - Update
 
-        /// <summary>
-        /// Update an existing item in the database
-        /// </summary>
-        /// <param name="itemID">item ID that will be updated</param>
-        /// <param name="depostID">deposit ID</param>
-        /// <param name="categoryID">category ID</param>
-        /// <param name="brandID">brand ID</param>
-        /// <param name="stock">stock of the item. Must be at least 0</param>
-        /// <param name="name">item name</param>
-        /// <param name="description">item description</param>
-        /// <returns>true if success, false if not</returns>
-        public bool UpdateItem(int itemID, int depostID, int categoryID, int brandID, int stock, string name,
-            string description)
+        public bool SetPrimaryImage(int filmId, string fileName)
         {
-            OracleCommand cmd =
-                new OracleCommand(
-                    "UPDATE ITEM SET name = ':name', description = ':description', brandID = :brandID, categoryID = :categoryID, " +
-                    "stock = :stock, depositID = :depositID WHERE itemID = :itemID");
-
-            cmd.Parameters.Add(new OracleParameter("name", name));
-            cmd.Parameters.Add(new OracleParameter("description", description));
-            cmd.Parameters.Add(new OracleParameter("brandID", brandID));
-            cmd.Parameters.Add(new OracleParameter("categoryID", categoryID));
-            cmd.Parameters.Add(new OracleParameter("stock", stock));
-            cmd.Parameters.Add(new OracleParameter("depositID", depostID));
-            cmd.Parameters.Add(new OracleParameter("itemID", itemID));
+            OracleCommand cmd = new OracleCommand("UPDATE FILM SET AFBEELDING=:image WHERE FILMID=:filmID");
+            cmd.Parameters.Add("filmID", filmId);
+            cmd.Parameters.Add("image", fileName);
 
             return Execute(cmd);
         }

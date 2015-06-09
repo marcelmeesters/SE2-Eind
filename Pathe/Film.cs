@@ -18,13 +18,15 @@ namespace Pathe
 
         #region Constructor
 
-        public Film(int filmId, string title, string description, int duration, DateTime release, string kijkWijzers)
+        public Film(int filmId, string title, string description, int duration, DateTime release, string kijkWijzers, string primaryImage = null, List<string> images = null )
         {
             FilmId = filmId;
             Title = title;
             Description = description;
             Duration = duration;
             Release = release;
+            PrimaryImage = primaryImage;
+            Images = images;
 
             foreach (string kw in kijkWijzers.Split(','))
             {
@@ -36,13 +38,14 @@ namespace Pathe
             }
         }
 
-        public Film(int filmId, string title, string description, int duration, DateTime release, List<Kijkwijzer> kws, List<string> images = null)
+        public Film(int filmId, string title, string description, int duration, DateTime release, List<Kijkwijzer> kws, string primaryImage = null, List<string> images = null)
         {
             FilmId = filmId;
             Title = title;
             Description = description;
             Duration = duration;
             Release = release;
+            PrimaryImage = primaryImage;
             Images = images;
             kijkWijzers = kws;
         }
@@ -88,6 +91,8 @@ namespace Pathe
 
         public List<string> Images { get; set; }
 
+        public string PrimaryImage { get; set; }
+
         #endregion
 
         #region Methods
@@ -101,7 +106,7 @@ namespace Pathe
             try
             {
                 string release = Release.ToString("dd-MMM-yy");
-                FilmId = Convert.ToInt32(db.Createfilm(Title, release, Duration, KijkwijzerString, Description)[0]["ID"]);
+                FilmId = Convert.ToInt32(db.Createfilm(Title, release, Duration, KijkwijzerString, Description, PrimaryImage)[0]["ID"]);
             }
             catch (Exception ex)
             {

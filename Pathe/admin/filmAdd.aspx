@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/inc/Pathe_admin.master" AutoEventWireup="true" CodeBehind="filmAdd.aspx.cs" Inherits="Pathe.admin.filmAdd" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/inc/Pathe_admin.master" AutoEventWireup="true" CodeBehind="filmAdd.aspx.cs" Inherits="Pathe.admin.filmAdd" validateRequest="false" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadPlaceholder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceholder" runat="server">
@@ -52,7 +52,7 @@
                                 <div class="col-lg-5">
                                     <div class="form-group">
                                         <input type="text" readonly="" class="form-control floating-label" placeholder="Afbeeldingen"/>
-                                        <input type="file" id="imgPoster" multiple="" runat="server" accept="image/*"/>
+                                        <input type="file" id="imgPoster" runat="server" accept="image/*"/>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
@@ -128,4 +128,8 @@
     </div>
 </asp:Content>
 <asp:Content runat="server" ID="Scripts" ContentPlaceHolderID="ScriptsPlaceholder">
+    <script src="http://cdn.ckeditor.com/4.4.7/basic/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('ContentPlaceholder_txtDescription');
+    </script>
 </asp:Content>
