@@ -256,6 +256,7 @@
     <Compile Include="roles.aspx.designer.cs">
       <DependentUpon>roles.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SimpleDate.cs" />
     <Compile Include="template.aspx.cs">
       <DependentUpon>template.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -19,15 +19,20 @@ namespace Pathe
 
         #region Constructor
 
-        public Film(int filmId, string title, string description, int duration, DateTime release, string kijkWijzers, string primaryImage = null, List<string> images = null )
+        public Film(int filmId, string title, string description, int duration, DateTime release, string kijkWijzers, bool normal, bool dried, bool imax, bool i3d, string primaryImage = null, List<string> images = null )
         {
             FilmId = filmId;
             Title = title;
             Description = description;
             Duration = duration;
-            Release = release;
+            Release = new DateTime(release.Year + 2000, release.Month, release.Day);
             PrimaryImage = primaryImage;
             Images = images;
+
+            IsNormaal = normal;
+            Is3D = dried;
+            IsImax = imax;
+            IsI3D = i3d;
 
             foreach (string kw in kijkWijzers.Split(','))
             {
@@ -39,7 +44,7 @@ namespace Pathe
             }
         }
 
-        public Film(int filmId, string title, string description, int duration, DateTime release, List<Kijkwijzer> kws, string primaryImage = null, List<string> images = null)
+        public Film(int filmId, string title, string description, int duration, DateTime release, List<Kijkwijzer> kws, bool normal, bool dried, bool imax, bool i3d, string primaryImage = null, List<string> images = null)
         {
             FilmId = filmId;
             Title = title;
@@ -48,6 +53,12 @@ namespace Pathe
             Release = release;
             PrimaryImage = primaryImage;
             Images = images;
+
+            IsNormaal = normal;
+            Is3D = dried;
+            IsImax = imax;
+            IsI3D = i3d;
+
             kijkWijzers = kws;
         }
 
@@ -60,6 +71,10 @@ namespace Pathe
         public string Description { get; private set; }
         public int Duration { get; private set; }
         public DateTime Release { get; private set; }
+        public bool IsNormaal { get; private set; }
+        public bool Is3D { get; private set; }
+        public bool IsImax { get; private set; }
+        public bool IsI3D { get; private set; }
 
         public List<Kijkwijzer> KijkWijzers
         {
@@ -104,7 +119,10 @@ namespace Pathe
             try
             {
                 string release = Release.ToString("dd-MMM-yy");
-                FilmId = Convert.ToInt32(db.Createfilm(Title, release, Duration, KijkwijzerString, Description, PrimaryImage)[0]["ID"]);
+                FilmId =
+                    Convert.ToInt32(
+                        db.Createfilm(Title, release, Duration, KijkwijzerString, Description, IsNormaal, Is3D, IsImax,
+                            IsI3D, PrimaryImage)[0]["ID"]);
             }
             catch (Exception ex)
             {

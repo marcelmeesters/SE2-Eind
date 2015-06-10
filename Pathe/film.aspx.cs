@@ -25,65 +25,27 @@ namespace Pathe
 
             Dictionary<string, object> filmInfo = db.GetFilmInfo(filmID)[0];
 
-            string[] releaseDate = filmInfo["RELEASEDATE"].ToString().Split(' ')[0].Split('-');
-            int releaseDay = Convert.ToInt32(releaseDate[0]);
-            int releaseYear = Convert.ToInt32(releaseDate[2]);
-            int releaseMonth = 1;
+            SimpleDate simDate = new SimpleDate(filmInfo["RELEASEDATE"].ToString());
 
-            switch (releaseDate[1])
-            {
-                case "JAN":
-                    releaseMonth = 1;
-                    break;
-                case "FEB":
-                    releaseMonth = 2;
-                    break;
-                case "MAR":
-                    releaseMonth = 3;
-                    break;
-                case "APR":
-                    releaseMonth = 4;
-                    break;
-                case "MAY":
-                    releaseMonth = 5;
-                    break;
-                case "JUN":
-                    releaseMonth = 6;
-                    break;
-                case "JUL":
-                    releaseMonth = 7;
-                    break;
-                case "AUG":
-                    releaseMonth = 8;
-                    break;
-                case "SEP":
-                    releaseMonth = 9;
-                    break;
-                case "OCT":
-                    releaseMonth = 10;
-                    break;
-                case "NOV":
-                    releaseMonth = 11;
-                    break;
-                case "DEC":
-                    releaseMonth = 12;
-                    break;
-
-            }
+            DateTime releaseDate = simDate.RealDate;
 
             Film thisFilm = new Film(
                 Convert.ToInt32(filmInfo["FILMID"]),
                 filmInfo["TITEL"].ToString(),
                 filmInfo["BESCHRIJVING"].ToString(),
                 Convert.ToInt32(filmInfo["DUUR"]),
-                new DateTime(releaseYear, releaseMonth, releaseDay),
+                releaseDate,
                 filmInfo["KIJKWIJZER"].ToString(),
+                (filmInfo["ISNORMAAL"].ToString() == "1"),
+                (filmInfo["ISDRIED"].ToString() == "1"),
+                (filmInfo["ISIMAX"].ToString() == "1"),
+                (filmInfo["ISI3D"].ToString() == "1"),
                 filmInfo["AFBEELDING"].ToString()
                 );
 
             lblDescription.Text = thisFilm.Description;
             lblTitle.Text = thisFilm.Title;
-            lblRelease.Text = thisFilm.Release.ToShortDateString();
+            lblRelease.Text = thisFilm.Release.ToString("dd MMM yyyy");
             imgPoster.Src = "/img/upload/" + thisFilm.FilmId + "/" + thisFilm.PrimaryImage;
 
             lblKijkwijzer.Text = thisFilm.KijkwijzerStringImg;

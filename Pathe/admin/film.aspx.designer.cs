@@ -13,13 +13,13 @@ namespace Pathe.admin {
     public partial class film {
         
         /// <summary>
-        /// lblTitle control.
+        /// imgPoster1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTitle;
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgPoster1;
         
         /// <summary>
         /// lblStatus control.
@@ -67,6 +67,42 @@ namespace Pathe.admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl numDuur;
         
         /// <summary>
+        /// chkNormaal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkNormaal;
+        
+        /// <summary>
+        /// chkDried control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkDried;
+        
+        /// <summary>
+        /// chkImax control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkImax;
+        
+        /// <summary>
+        /// chkI3D control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkI3D;
+        
+        /// <summary>
         /// txtDescription control.
         /// </summary>
         /// <remarks>
@@ -85,13 +121,13 @@ namespace Pathe.admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputFile imgPoster;
         
         /// <summary>
-        /// btnAddFilm control.
+        /// btnEditFilm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddFilm;
+        protected global::System.Web.UI.WebControls.Button btnEditFilm;
         
         /// <summary>
         /// kw_Al control.

@@ -51,8 +51,14 @@ namespace Pathe.admin
             if (kw_drugsalcohol.Checked) kwList.Add(Kijkwijzer.Drugsalcohol);
             if (kw_taalgebruik.Checked) kwList.Add(Kijkwijzer.Taalgebruik);
 
+            bool normaal = chkNormaal.Checked;
+            bool dried = chkDried.Checked;
+            bool imax = chkImax.Checked;
+            bool i3d = chkI3D.Checked;
 
-            Film temp = new Film(0, titel, description, duur, releasedate, kwList);
+
+            Film temp = new Film(0, titel, description, duur, releasedate, kwList, normaal, dried, imax, i3d);
+
             int newID = temp.Create();
 
             /* UPLOAD MULTIPLE IMAGES

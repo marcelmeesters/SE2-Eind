@@ -31,13 +31,35 @@
                                 <div class="form-group col-lg-4">
                                     <input class="form-control floating-label" id="numDuur" type="number" placeholder="Speeltijd" data-hint="Speeltijd van de film, in minuten" runat="server" required/>
                                 </div>
-                                <div class="form-group col-lg-4">
-                                    <select class="form-control floating-label" placeholder="Film Type" id="cmbType" required>
-                                        <option value="norm">Normaal</option>
-                                        <option value="3d">3D</option>
-                                        <option value="imax">IMAX</option>
-                                        <option value="i3d">IMAX 3D</option>
-                                    </select>
+                                </div>
+                            <div class="row">
+                                <div class="form-group col-lg-3">
+                                     <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="chkNormaal" runat="server"/> Normaal
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="chkDried" runat="server"/> 3D
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="chkImax" runat="server"/> IMAX
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="chkI3D" runat="server"/> IMAX 3D
+                                        </label>
+                                    </div>
                                     <br/>
                                 </div>
                             </div>

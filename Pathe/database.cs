@@ -120,7 +120,17 @@ namespace Pathe
             cmd.Parameters.Add(new OracleParameter("filmID", filmID));
 
             return ExecuteQuery(cmd);
-        } 
+        }
+
+        public bool FilmExists(int filmID)
+        {
+            OracleCommand cmd = new OracleCommand("SELECT COUNT(FILMID) AS COUNT FROM FILM WHERE FILMID = :filmID");
+            cmd.Parameters.Add("filmID", filmID);
+
+            int count = Convert.ToInt32(ExecuteQuery(cmd)[0]["COUNT"]);
+
+            return (count == 1);
+        }
 
         public List<Dictionary<string, object>> GetFilms(int type = 1)
         {
@@ -167,13 +177,13 @@ namespace Pathe
 
         #region Methods - Insert
 
-        public List<Dictionary<string, object>> Createfilm(string titel, string releaseDate, int duur, string kijkwijzers, string beschrijving, string image)
+        public List<Dictionary<string, object>> Createfilm(string titel, string releaseDate, int duur, string kijkwijzers, string beschrijving, bool isNormaal, bool is3d, bool isImax, bool isI3D, string image)
         {
             try
             {
                 OracleCommand cmd =
                     new OracleCommand(
-                        "INSERT INTO FILM VALUES (NULL, :titel, :releaseDate, :duur, :kijkwijzer, :beschrijving, :image)");
+                        "INSERT INTO FILM VALUES (NULL, :titel, :releaseDate, :duur, :kijkwijzer, :beschrijving, :image, :normaal, :dried, :imax, :i3d)");
 
                 cmd.Parameters.Add("titel", titel);
                 cmd.Parameters.Add("releaseDate", releaseDate);
@@ -181,6 +191,10 @@ namespace Pathe
                 cmd.Parameters.Add("kijkwijzer", kijkwijzers);
                 cmd.Parameters.Add("beschrijving", beschrijving);
                 cmd.Parameters.Add("image", image);
+                cmd.Parameters.Add("normaal", isNormaal ? "1" : "0");
+                cmd.Parameters.Add("dried", is3d ? "1" : "0");
+                cmd.Parameters.Add("imax", isImax ? "1" : "0");
+                cmd.Parameters.Add("i3d", isI3D ? "1" : "0");
 
                 if (!Execute(cmd)) return null;
                 OracleCommand cmdId = new OracleCommand("SELECT MAX(FILMID) as id FROM FILM");

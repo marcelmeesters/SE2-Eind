@@ -1,14 +1,14 @@
 ﻿<%@ Page Title="Film - " MasterPageFile="~/inc/Pathe_admin.master" Language="C#" AutoEventWireup="true" CodeBehind="film.aspx.cs" Inherits="Pathe.admin.film" %>
 <asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >
     <div class="jumbotron">
-        <h1><asp:Label ID="lblTitle" runat="server" Text="Label"></asp:Label></h1>
+        <h1>Film Bewerken</h1>
         <p>
         </p>
     </div>
     <div class="row">
         <div class="col-md-3">
             <div class="well">
-                <h2>Sidebar</h2>
+                <img src="[REPLACE ME]" alt="Poster" id="imgPoster1" runat="server" style="width:100%"/>
             </div>
         </div>
         <div class="col-md-9">
@@ -30,13 +30,35 @@
                                 <div class="form-group col-lg-4">
                                     <input class="form-control floating-label" id="numDuur" type="number" placeholder="Speeltijd" data-hint="Speeltijd van de film, in minuten" runat="server" required/>
                                 </div>
-                                <div class="form-group col-lg-4">
-                                    <select class="form-control floating-label" placeholder="Film Type" id="cmbType" required>
-                                        <option value="norm">Normaal</option>
-                                        <option value="3d">3D</option>
-                                        <option value="imax">IMAX</option>
-                                        <option value="i3d">IMAX 3D</option>
-                                    </select>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-3">
+                                     <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="chkNormaal" runat="server"/> Normaal
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="chkDried" runat="server"/> 3D
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="chkImax" runat="server"/> IMAX
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="chkI3D" runat="server"/> IMAX 3D
+                                        </label>
+                                    </div>
                                     <br/>
                                 </div>
                             </div>
@@ -55,8 +77,8 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
-                                    <asp:Button ID="btnAddFilm" runat="server" OnClick="btnAddFilm_OnClick" Text="Film toevoegen" CssClass="btn btn-success btn-lg" />
-                                    
+                                    <asp:Button ID="btnEditFilm" runat="server" OnClick="btnEditFilm_OnClick" Text="Film bewerken" CssClass="btn btn-success btn-lg" />
+                                    <a href="/Admin/Films/List" class="btn btn-flat btn-danger btn-sm">Annuleren</a>
                                 </div>
                             </div>
                             

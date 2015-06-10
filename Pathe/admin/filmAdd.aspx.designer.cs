@@ -58,6 +58,42 @@ namespace Pathe.admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl numDuur;
         
         /// <summary>
+        /// chkNormaal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkNormaal;
+        
+        /// <summary>
+        /// chkDried control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkDried;
+        
+        /// <summary>
+        /// chkImax control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkImax;
+        
+        /// <summary>
+        /// chkI3D control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkI3D;
+        
+        /// <summary>
         /// txtDescription control.
         /// </summary>
         /// <remarks>

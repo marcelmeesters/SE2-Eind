@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.SqlServer.Server;
 
 namespace Pathe.admin
 {
@@ -24,68 +25,35 @@ namespace Pathe.admin
             int filmID =
                 int.Parse(filmUrl.Substring(0, filmUrl.IndexOf("-", StringComparison.Ordinal)));
 
+            if (!db.FilmExists(filmID)) Response.Redirect("/Admin/Films/List/");
+
             Dictionary<string, object> filmInfo = db.GetFilmInfo(filmID)[0];
 
-            string[] releaseDate = filmInfo["RELEASEDATE"].ToString().Split(' ')[0].Split('-');
-            int releaseDay = Convert.ToInt32(releaseDate[0]);
-            int releaseYear = Convert.ToInt32(releaseDate[2]);
-            int releaseMonth = 1;
+            SimpleDate simDate = new SimpleDate(filmInfo["RELEASEDATE"].ToString());
 
-            switch (releaseDate[1])
-            {
-                case "JAN":
-                    releaseMonth = 1;
-                    break;
-                case "FEB":
-                    releaseMonth = 2;
-                    break;
-                case "MAR":
-                    releaseMonth = 3;
-                    break;
-                case "APR":
-                    releaseMonth = 4;
-                    break;
-                case "MAY":
-                    releaseMonth = 5;
-                    break;
-                case "JUN":
-                    releaseMonth = 6;
-                    break;
-                case "JUL":
-                    releaseMonth = 7;
-                    break;
-                case "AUG":
-                    releaseMonth = 8;
-                    break;
-                case "SEP":
-                    releaseMonth = 9;
-                    break;
-                case "OCT":
-                    releaseMonth = 10;
-                    break;
-                case "NOV":
-                    releaseMonth = 11;
-                    break;
-                case "DEC":
-                    releaseMonth = 12;
-                    break;
-
-            }
+            DateTime releaseDate = simDate.RealDate;
 
             Film thisFilm = new Film(
                 Convert.ToInt32(filmInfo["FILMID"]),
                 filmInfo["TITEL"].ToString(),
                 filmInfo["BESCHRIJVING"].ToString(),
                 Convert.ToInt32(filmInfo["DUUR"]),
-                new DateTime(releaseYear, releaseMonth, releaseDay),
+                releaseDate,
                 filmInfo["KIJKWIJZER"].ToString(),
+                (filmInfo["ISNORMAAL"].ToString() == "1"),
+                (filmInfo["ISDRIED"].ToString() == "1"),
+                (filmInfo["ISIMAX"].ToString() == "1"),
+                (filmInfo["ISI3D"].ToString() == "1"),
                 filmInfo["AFBEELDING"].ToString()
                 );
 
             txtTitel.Value = thisFilm.Title;
             txtDescription.Value = thisFilm.Description;
             numDuur.Value = Convert.ToString(thisFilm.Duration);
-            datRelease.Value = thisFilm.Release.ToString("dd-MMM-yyyy");
+
+            imgPoster1.Src = "/img/upload/" + thisFilm.FilmId + "/" + thisFilm.PrimaryImage;
+
+            datRelease.Value = thisFilm.Release.ToString("yyyy-MM-dd");
 
             kw_Al.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Al);
             kw_zes.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Zes);
@@ -99,9 +67,14 @@ namespace Pathe.admin
             kw_drugsalcohol.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Drugsalcohol);
             kw_taalgebruik.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Taalgebruik);
 
+            chkNormaal.Checked = thisFilm.IsNormaal;
+            chkDried.Checked = thisFilm.Is3D;
+            chkImax.Checked = thisFilm.IsImax;
+            chkI3D.Checked = thisFilm.IsI3D;
+
         }
 
-        protected void btnAddFilm_OnClick(object sender, EventArgs e)
+        protected void btnEditFilm_OnClick(object sender, EventArgs e)
         {
             Database db = Database.Instance;
             string titel = txtTitel.Value;
@@ -124,8 +97,13 @@ namespace Pathe.admin
             if (kw_drugsalcohol.Checked) kwList.Add(Kijkwijzer.Drugsalcohol);
             if (kw_taalgebruik.Checked) kwList.Add(Kijkwijzer.Taalgebruik);
 
+            bool normaal = chkNormaal.Checked;
+            bool dried = chkDried.Checked;
+            bool imax = chkImax.Checked;
+            bool i3d = chkI3D.Checked;
 
-            Film temp = new Film(0, titel, description, duur, releasedate, kwList);
+
+            Film temp = new Film(0, titel, description, duur, releasedate, kwList, normaal, dried, imax, i3d);
             int newID = temp.Create();
             try
             {
