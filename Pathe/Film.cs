@@ -131,6 +131,20 @@ namespace Pathe
             return FilmId;
         }
 
+        public void Update()
+        {
+            try
+            {
+                string release = Release.ToString("dd-MMM-yy");
+                db.UpdateFilm(FilmId,Title, release, Duration, KijkwijzerString, Description, IsNormaal, Is3D, IsImax,
+                    IsI3D);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+        }
+
         /// <summary>
         /// Convert a comma-separated list of kijkwijzer ratings to a list of Kijkwijzer objects (Enum)
         /// </summary>

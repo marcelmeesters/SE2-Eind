@@ -13,6 +13,7 @@ namespace Pathe.admin
     public partial class film : System.Web.UI.Page
     {
         private Database db = Database.Instance;
+        private int filmID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,56 +23,58 @@ namespace Pathe.admin
             if (filmUrl == null || actionUrl == null) Response.Redirect("/Admin/Films/List/");
             if (!Regex.IsMatch(filmUrl, @"[0-9]+-.*")) Response.Redirect("/Admin/Films/List/");
             
-            int filmID =
+            filmID =
                 int.Parse(filmUrl.Substring(0, filmUrl.IndexOf("-", StringComparison.Ordinal)));
 
             if (!db.FilmExists(filmID)) Response.Redirect("/Admin/Films/List/");
 
-            Dictionary<string, object> filmInfo = db.GetFilmInfo(filmID)[0];
+            if (!Page.IsPostBack)
+            {
+                Dictionary<string, object> filmInfo = db.GetFilmInfo(filmID)[0];
 
-            SimpleDate simDate = new SimpleDate(filmInfo["RELEASEDATE"].ToString());
+                SimpleDate simDate = new SimpleDate(filmInfo["RELEASEDATE"].ToString());
 
-            DateTime releaseDate = simDate.RealDate;
+                DateTime releaseDate = simDate.RealDate;
 
-            Film thisFilm = new Film(
-                Convert.ToInt32(filmInfo["FILMID"]),
-                filmInfo["TITEL"].ToString(),
-                filmInfo["BESCHRIJVING"].ToString(),
-                Convert.ToInt32(filmInfo["DUUR"]),
-                releaseDate,
-                filmInfo["KIJKWIJZER"].ToString(),
-                (filmInfo["ISNORMAAL"].ToString() == "1"),
-                (filmInfo["ISDRIED"].ToString() == "1"),
-                (filmInfo["ISIMAX"].ToString() == "1"),
-                (filmInfo["ISI3D"].ToString() == "1"),
-                filmInfo["AFBEELDING"].ToString()
-                );
+                Film thisFilm = new Film(
+                    Convert.ToInt32(filmInfo["FILMID"]),
+                    filmInfo["TITEL"].ToString(),
+                    filmInfo["BESCHRIJVING"].ToString(),
+                    Convert.ToInt32(filmInfo["DUUR"]),
+                    releaseDate,
+                    filmInfo["KIJKWIJZER"].ToString(),
+                    (filmInfo["ISNORMAAL"].ToString() == "1"),
+                    (filmInfo["ISDRIED"].ToString() == "1"),
+                    (filmInfo["ISIMAX"].ToString() == "1"),
+                    (filmInfo["ISI3D"].ToString() == "1"),
+                    filmInfo["AFBEELDING"].ToString()
+                    );
 
-            txtTitel.Value = thisFilm.Title;
-            txtDescription.Value = thisFilm.Description;
-            numDuur.Value = Convert.ToString(thisFilm.Duration);
+                txtTitel.Value = thisFilm.Title;
+                txtDescription.Value = thisFilm.Description;
+                numDuur.Value = Convert.ToString(thisFilm.Duration);
 
-            imgPoster1.Src = "/img/upload/" + thisFilm.FilmId + "/" + thisFilm.PrimaryImage;
+                imgPoster1.Src = "/img/upload/" + thisFilm.FilmId + "/" + thisFilm.PrimaryImage;
 
-            datRelease.Value = thisFilm.Release.ToString("yyyy-MM-dd");
+                datRelease.Value = thisFilm.Release.ToString("yyyy-MM-dd");
 
-            kw_Al.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Al);
-            kw_zes.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Zes);
-            kw_negen.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Negen);
-            kw_twaalf.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Twaalf);
-            kw_zestien.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Zestien);
-            kw_geweld.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Geweld);
-            kw_angst.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Angst);
-            kw_seks.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Seks);
-            kw_discriminatie.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Discriminatie);
-            kw_drugsalcohol.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Drugsalcohol);
-            kw_taalgebruik.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Taalgebruik);
+                kw_Al.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Al);
+                kw_zes.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Zes);
+                kw_negen.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Negen);
+                kw_twaalf.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Twaalf);
+                kw_zestien.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Zestien);
+                kw_geweld.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Geweld);
+                kw_angst.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Angst);
+                kw_seks.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Seks);
+                kw_discriminatie.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Discriminatie);
+                kw_drugsalcohol.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Drugsalcohol);
+                kw_taalgebruik.Checked = thisFilm.KijkWijzers.Contains(Kijkwijzer.Taalgebruik);
 
-            chkNormaal.Checked = thisFilm.IsNormaal;
-            chkDried.Checked = thisFilm.Is3D;
-            chkImax.Checked = thisFilm.IsImax;
-            chkI3D.Checked = thisFilm.IsI3D;
-
+                chkNormaal.Checked = thisFilm.IsNormaal;
+                chkDried.Checked = thisFilm.Is3D;
+                chkImax.Checked = thisFilm.IsImax;
+                chkI3D.Checked = thisFilm.IsI3D;
+            }
         }
 
         protected void btnEditFilm_OnClick(object sender, EventArgs e)
@@ -80,6 +83,8 @@ namespace Pathe.admin
             string titel = txtTitel.Value;
             string description = txtDescription.Value;
             List<string> images = new List<string>();
+
+            var dingetje = Page.Request.Form;
 
             DateTime releasedate = Convert.ToDateTime(datRelease.Value);
             int duur = Convert.ToInt32(numDuur.Value);
@@ -103,26 +108,22 @@ namespace Pathe.admin
             bool i3d = chkI3D.Checked;
 
 
-            Film temp = new Film(0, titel, description, duur, releasedate, kwList, normaal, dried, imax, i3d);
-            int newID = temp.Create();
+            Film temp = new Film(filmID, titel, description, duur, releasedate, kwList, normaal, dried, imax, i3d);
+            temp.Update();
             try
             {
-                Directory.CreateDirectory(Server.MapPath("~\\img\\upload\\") + newID);
+                if (imgPoster.PostedFile == null || imgPoster.PostedFile.ContentLength <= 0) return;
+                Directory.CreateDirectory(Server.MapPath("~\\img\\upload\\") + filmID);
+                var file = Request.Files[0];
+                images.Add(file.FileName);
 
-                if (imgPoster.PostedFile != null && imgPoster.PostedFile.ContentLength > 0)
-                {
-                    var file = Request.Files[0];
-                    images.Add(file.FileName);
+                if (!Regex.IsMatch(file.FileName, @"^(.*\.)((jpg)|(jpeg)|(png)|(gif))$")) return;
+                string saveAs = Server.MapPath("~\\img\\upload\\") + filmID + "\\" + file.FileName;
+                file.SaveAs(saveAs);
 
-                    if (Regex.IsMatch(file.FileName, @"^(.*\.)((jpg)|(jpeg)|(png)|(gif))$"))
-                    {
-                        string saveAs = Server.MapPath("~\\img\\upload\\") + newID + "\\" + file.FileName;
-                        file.SaveAs(saveAs);
+                temp.PrimaryImage = file.FileName;
 
-                        temp.PrimaryImage = file.FileName;
-                        db.SetPrimaryImage(newID, file.FileName);
-                    }
-                }
+                db.SetPrimaryImage(filmID, file.FileName);
             }
             catch (Exception ex)
             {

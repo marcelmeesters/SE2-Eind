@@ -251,6 +251,41 @@ namespace Pathe
             return Execute(cmd);
         }
 
+        public bool UpdateFilm(int filmID, string titel, string releaseDate, int duur, string kijkwijzers,
+            string beschrijving, bool isNormaal, bool is3d, bool isImax, bool isI3D)
+        {
+            OracleCommand cmd = new OracleCommand("UPDATE FILM SET " +
+                                                  "TITEL = :titel," +
+                                                  "RELEASEDATE = :releasedate," +
+                                                  "DUUR = :duur," +
+                                                  "KIJKWIJZER = :kijkwijzer," +
+                                                  "BESCHRIJVING = :beschrijving," +
+                                                  "ISNORMAAL = :normaal," +
+                                                  "ISDRIED = :dried," +
+                                                  "ISIMAX = :imax," +
+                                                  "ISI3D = :i3d" +
+                                                  " WHERE FILMID = :filmID");
+
+
+
+
+
+
+
+            cmd.Parameters.Add("titel", titel);
+            cmd.Parameters.Add("releasedate", releaseDate);
+            cmd.Parameters.Add("duur", duur);
+            cmd.Parameters.Add("kijkwijzer", kijkwijzers);
+            cmd.Parameters.Add("beschrijving", beschrijving);
+            cmd.Parameters.Add("normaal", isNormaal ? "1" : "0");
+            cmd.Parameters.Add("dried", is3d ? "1" : "0");
+            cmd.Parameters.Add("imax", isImax ? "1" : "0");
+            cmd.Parameters.Add("i3d", isI3D ? "1" : "0");
+            cmd.Parameters.Add("filmID", filmID);
+
+            return Execute(cmd);
+        }
+
         #endregion
 
         #region Methods - Delete

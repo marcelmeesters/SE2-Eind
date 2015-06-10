@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Film - " MasterPageFile="~/inc/Pathe_admin.master" Language="C#" AutoEventWireup="true" CodeBehind="film.aspx.cs" Inherits="Pathe.admin.film" %>
+﻿<%@ Page Title="Film - " MasterPageFile="~/inc/Pathe_admin.master" Language="C#" AutoEventWireup="true" CodeBehind="film.aspx.cs" Inherits="Pathe.admin.film" validateRequest="false" %>
 <asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >
     <div class="jumbotron">
         <h1>Film Bewerken</h1>
@@ -35,7 +35,7 @@
                                 <div class="form-group col-lg-3">
                                      <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" id="chkNormaal" runat="server"/> Normaal
+                                            <asp:CheckBox ID="chkNormaal" runat="server" />Normaal
                                         </label>
                                     </div>
                                 </div>
