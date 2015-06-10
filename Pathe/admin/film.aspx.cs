@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Microsoft.SqlServer.Server;
 
 namespace Pathe.admin
 {
@@ -53,6 +52,8 @@ namespace Pathe.admin
                 txtTitel.Value = thisFilm.Title;
                 txtDescription.Value = thisFilm.Description;
                 numDuur.Value = Convert.ToString(thisFilm.Duration);
+
+                Page.Title = thisFilm.Title + " = Pathé";
 
                 imgPoster1.Src = "/img/upload/" + thisFilm.FilmId + "/" + thisFilm.PrimaryImage;
 

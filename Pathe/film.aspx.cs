@@ -43,6 +43,8 @@ namespace Pathe
                 filmInfo["AFBEELDING"].ToString()
                 );
 
+            Page.Title = thisFilm.Title + " - Pathé";
+
             lblDescription.Text = thisFilm.Description;
             lblTitle.Text = thisFilm.Title;
             lblRelease.Text = thisFilm.Release.ToString("dd MMM yyyy");

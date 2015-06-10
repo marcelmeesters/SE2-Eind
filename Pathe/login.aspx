@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Pathé - Login" Language="C#" MasterPageFile="~/inc/Pathe_user.Master" CodeBehind="login.aspx.cs" Inherits="Pathe.login"%>
+﻿<%@ Page Title="Login - Pathé" Language="C#" MasterPageFile="~/inc/Pathe_user.Master" CodeBehind="login.aspx.cs" Inherits="Pathe.login"%>
 <asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >
     <div class="row">
         <form runat="server" ID="loginForm">

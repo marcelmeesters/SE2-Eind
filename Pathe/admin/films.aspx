@@ -1,11 +1,12 @@
-﻿<%@ Page Title="Pathé - Films" Language="C#" MasterPageFile="~/inc/Pathe_admin.master" CodeBehind="films.aspx.cs" Inherits="Pathe.admin.films" %>
+﻿<%@ Page Title="Films - Pathé" Language="C#" MasterPageFile="~/inc/Pathe_admin.master" CodeBehind="films.aspx.cs" Inherits="Pathe.admin.films" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadPlaceholder" Runat="Server">
 </asp:Content>
 <asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >
     <form id="FilmsForm" runat="server">
     <div class="jumbotron">
         <h1>Film overzicht</h1>
-        <p></p>
+        <p><a href="/Admin/Films/Add" class="floating-action"><i class="btn btn-success btn-fab btn-raised mdi-content-add"></i></a></p>
+        
     </div>
     <div class="row">
         <div class="col-lg-3">
@@ -27,15 +28,15 @@
             <div class="row">
                 <asp:Repeater ID="Repeater1" runat="server" DataSourceID="FilmsDataSource">
                 <ItemTemplate>
-                    <a href="/Admin/Film/<%# Eval("FilmID") %>-<%# FormatTitleUrl( Eval("Titel")) %>">
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="well ">
-                                <div class="movie_info">
-                                    <h4 class="movie_title"><%# Eval("Titel") %></h4>
-                                </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="well ">
+                            <div class="movie_info">
+                                <h4 class="movie_title"><%# Eval("Titel") %></h4>
                             </div>
+                            <a href="/Admin/Film/<%# Eval("FilmID") %>-<%# FormatTitleUrl(Eval("Titel")) %>/del" class="col-lg-6"><i class="btn btn-danger btn-fab btn-raised mdi-content-remove-circle"></i></a>&nbsp;
+                            <a href="/Admin/Film/<%# Eval("FilmID") %>-<%# FormatTitleUrl( Eval("Titel")) %>" class="col-lg-6 push-right"><i class="btn btn-info btn-fab btn-raised mdi-action-info push-right"></i></a>
                         </div>
-                    </a>
+                    </div>
                 </ItemTemplate>
             </asp:Repeater>
             </div>

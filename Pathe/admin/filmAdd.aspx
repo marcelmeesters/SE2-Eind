@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/inc/Pathe_admin.master" AutoEventWireup="true" CodeBehind="filmAdd.aspx.cs" Inherits="Pathe.admin.filmAdd" validateRequest="false" %>
+﻿<%@ Page Title="Film Toevoegen - Pathé" Language="C#" MasterPageFile="~/inc/Pathe_admin.master" AutoEventWireup="true" CodeBehind="filmAdd.aspx.cs" Inherits="Pathe.admin.filmAdd" validateRequest="false" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadPlaceholder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceholder" runat="server">

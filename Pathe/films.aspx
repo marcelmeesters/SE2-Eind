@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Pathé - Films" Language="C#" MasterPageFile="~/inc/Pathe_user.Master" CodeBehind="films.aspx.cs" Inherits="Pathe.films" %>
+﻿<%@ Page Title="Films - Pathé" Language="C#" MasterPageFile="~/inc/Pathe_user.Master" CodeBehind="films.aspx.cs" Inherits="Pathe.films" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadPlaceholder" Runat="Server">
 </asp:Content>
 <asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >

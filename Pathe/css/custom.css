@@ -48,3 +48,9 @@ img.kijkwijzer {
     width: 30px;
     height: 30px;
 }
+
+.floating-action {
+    position: absolute;
+    top: 20%;
+    right: 25%;
+}

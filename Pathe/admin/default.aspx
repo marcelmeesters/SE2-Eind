@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Pathé - Admin" MasterPageFile="~/inc/Pathe_admin.master" Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="Pathe.admin._default" %>
+﻿<%@ Page Title="Admin Dashboard - Pathé" MasterPageFile="~/inc/Pathe_admin.master" Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="Pathe.admin._default" %>
 <asp:Content ID="MainContent1" ContentPlaceHolderID="ContentPlaceholder" runat="server" >
     
     <form id="form1" runat="server">
