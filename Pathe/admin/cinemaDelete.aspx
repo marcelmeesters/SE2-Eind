@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="cinemaDelete.aspx.cs" Inherits="Pathe.admin.cinemaDelete" %>

@@ -182,6 +182,14 @@ namespace Pathe
             return Convert.ToInt32(ExecuteQuery(cmd)[0]["COUNT"]);
         }
 
+        public int GetRoomCount(int bioscoopID)
+        {
+            OracleCommand cmd = new OracleCommand("SELECT COUNT(*) AS count FROM ZAAL WHERE BIOSCOOPID = :bioscoopID");
+            cmd.Parameters.Add("bioscoopID", bioscoopID);
+
+            return Convert.ToInt32(ExecuteQuery(cmd)[0]["COUNT"]);
+        }
+
         #endregion
 
         #region Methods - Insert
@@ -272,6 +280,24 @@ namespace Pathe
             return Convert.ToInt32(ExecuteQuery(cmdId)[0]["ID"]);
         }
 
+        public bool CreateCinema(string name, string address, string city, string open, string lift, string toilet,
+            string ring, string imax)
+        {
+            OracleCommand cmd = new OracleCommand("INSERT INTO BIOSCOOP VALUES (NULL, :name, :address, :city, :open, :lift, :toilet, :ring, :imax)");
+
+            cmd.Parameters.Add("name", name);
+            cmd.Parameters.Add("address", address);
+            cmd.Parameters.Add("city", city);
+            cmd.Parameters.Add("open", open);
+            cmd.Parameters.Add("lift", lift);
+            cmd.Parameters.Add("toilet", toilet);
+            cmd.Parameters.Add("ring", ring);
+            cmd.Parameters.Add("imax", imax);
+
+            return Execute(cmd);
+
+        }
+
         #endregion
 
         #region Methods - Update
@@ -333,6 +359,19 @@ namespace Pathe
         {
             OracleCommand cmd = new OracleCommand("DELETE FROM item WHERE itemID = :itemID");
             cmd.Parameters.Add(new OracleParameter("itemID", itemID));
+
+            return Execute(cmd);
+        }
+
+        public bool DeleteCinema(int cinemaID)
+        {
+            OracleCommand cmd = new OracleCommand("UPDATE ZAAL SET BIOSCOOPID = 0 WHERE BIOSCOOPID = :bioscoopID");
+            cmd.Parameters.Add("bioscoopID", cinemaID);
+
+            if (!Execute(cmd)) return false;
+
+            cmd = new OracleCommand("DELETE FROM BIOSCOOP WHERE BIOSCOOPID = :bioscoopID");
+            cmd.Parameters.Add("bioscoopID", cinemaID);
 
             return Execute(cmd);
         }

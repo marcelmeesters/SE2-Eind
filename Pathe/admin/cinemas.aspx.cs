@@ -23,5 +23,27 @@ namespace Pathe.admin
             return (title1 == null) ? null : Regex.Replace(title1.Replace(" ", "-"), "[^a-zA-Z0-9-]+", "");
         }
 
+        public string RoomCountClass(int bioscoopID)
+        {
+            int zaalCount = Database.Instance.GetRoomCount(bioscoopID);
+
+            string returned = "mdi-image-";
+
+            if (zaalCount == 0)
+            {
+                returned += "crop-square";
+            }
+            else if (zaalCount < 9)
+            {
+                returned += "filter-" + zaalCount;
+            }
+            else
+            {
+                returned += "filter-9-plus";
+            }
+
+            return returned;
+        }
+
     }
 }

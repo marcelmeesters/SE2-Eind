@@ -60,6 +60,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\cinemaAdd.aspx" />
+    <Content Include="admin\cinemaAddProcess.aspx" />
+    <Content Include="admin\cinemaDelete.aspx" />
     <Content Include="admin\cinemas.aspx" />
     <Content Include="admin\default.aspx" />
     <Content Include="admin\film.aspx" />
@@ -149,6 +152,27 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\cinemaAdd.aspx.cs">
+      <DependentUpon>cinemaAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\cinemaAdd.aspx.designer.cs">
+      <DependentUpon>cinemaAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\cinemaAddProcess.aspx.cs">
+      <DependentUpon>cinemaAddProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\cinemaAddProcess.aspx.designer.cs">
+      <DependentUpon>cinemaAddProcess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\cinemaDelete.aspx.cs">
+      <DependentUpon>cinemaDelete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\cinemaDelete.aspx.designer.cs">
+      <DependentUpon>cinemaDelete.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\cinemas.aspx.cs">
       <DependentUpon>cinemas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

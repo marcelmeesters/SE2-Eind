@@ -125,6 +125,9 @@
     <script src="/js/material.min.js"></script>
     <script src="/js/ripples.min.js"></script>
     <script src="/js/holder.min.js"></script>
+    
+    <script src="/js/sweetalert.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
 
     <script type="text/javascript">
     $.material.init();
@@ -135,6 +138,7 @@
         <% string pageName = Path.GetFileNameWithoutExtension(Page.AppRelativeVirtualPath); %>
         $("#menu_<%=pageName%>").addClass("active");
     </script> 
+
     <asp:ContentPlaceHolder runat="server" ID="ScriptsPlaceholder">
         
     </asp:ContentPlaceHolder>

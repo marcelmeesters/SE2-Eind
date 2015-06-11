@@ -7,81 +7,99 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pathe.inc {
+namespace Pathe.admin {
     
     
-    public partial class Pathe_user {
+    public partial class cinemaAdd {
         
         /// <summary>
-        /// HeadPlaceholder control.
+        /// lblStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadPlaceholder;
+        protected global::System.Web.UI.WebControls.Label lblStatus;
         
         /// <summary>
-        /// AdminMenuFilms control.
+        /// addCinemaForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginView AdminMenuFilms;
+        protected global::System.Web.UI.HtmlControls.HtmlForm addCinemaForm;
         
         /// <summary>
-        /// AdminMenuBlog control.
+        /// txtName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginView AdminMenuBlog;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtName;
         
         /// <summary>
-        /// AdminMenuUsers control.
+        /// txtAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginView AdminMenuUsers;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtAddress;
         
         /// <summary>
-        /// AdminMenuStaff control.
+        /// txtCity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginView AdminMenuStaff;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtCity;
         
         /// <summary>
-        /// LoginViewMenu control.
+        /// chkLift control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginView LoginViewMenu;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkLift;
         
         /// <summary>
-        /// ContentPlaceholder control.
+        /// chkToilet control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceholder;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkToilet;
         
         /// <summary>
-        /// ScriptsPlaceholder control.
+        /// chkRing control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ScriptsPlaceholder;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkRing;
+        
+        /// <summary>
+        /// chkImax control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkImax;
+        
+        /// <summary>
+        /// txtOpeningsTijden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtOpeningsTijden;
     }
 }
