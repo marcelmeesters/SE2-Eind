@@ -71,6 +71,7 @@
     <Content Include="css\roboto.css.map" />
     <Content Include="film.aspx" />
     <Content Include="films.aspx" />
+    <Content Include="finish_registration.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -198,6 +199,13 @@
     </Compile>
     <Compile Include="films.aspx.designer.cs">
       <DependentUpon>films.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="finish_registration.aspx.cs">
+      <DependentUpon>finish_registration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="finish_registration.aspx.designer.cs">
+      <DependentUpon>finish_registration.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

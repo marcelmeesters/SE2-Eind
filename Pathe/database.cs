@@ -171,7 +171,16 @@ namespace Pathe
 
             return ExecuteQuery(cmd);
 
-        } 
+        }
+
+        public int GetCustomerCount(string username)
+        {
+            OracleCommand cmd = new OracleCommand("SELECT COUNT(*) AS count FROM KLANT WHERE username = :username");
+
+            cmd.Parameters.Add("username", username);
+
+            return Convert.ToInt32(ExecuteQuery(cmd)[0]["COUNT"]);
+        }
 
         #endregion
 
@@ -236,6 +245,31 @@ namespace Pathe
             }
 
             return Execute(cmds);
+        }
+
+        public int CreateUser(string username, string email, string firstname, string tussen, string lastname,
+            string address,
+            int huisnummer, string postcode, string birthday, bool newsletter)
+        {
+            OracleCommand cmd =
+                new OracleCommand(
+                    "INSERT INTO KLANT VALUES(" +
+                    "NULL, :username, :email, :firstname, :tussen, :lastname, :address, :huisnr, :postcode, :birthday, :newsletter, NULL, NULL)");
+
+            cmd.Parameters.Add("username", username);
+            cmd.Parameters.Add("email", email);
+            cmd.Parameters.Add("firstname", firstname);
+            cmd.Parameters.Add("tussen", tussen);
+            cmd.Parameters.Add("lastname", lastname);
+            cmd.Parameters.Add("address", address);
+            cmd.Parameters.Add("huisnr", huisnummer);
+            cmd.Parameters.Add("postcode", postcode);
+            cmd.Parameters.Add("birthday", birthday);
+            cmd.Parameters.Add("newsletter", newsletter ? 1 : 0);
+
+            if (!Execute(cmd)) return 0;
+            OracleCommand cmdId = new OracleCommand("SELECT MAX(KLANTID) as id FROM KLANT");
+            return Convert.ToInt32(ExecuteQuery(cmdId)[0]["ID"]);
         }
 
         #endregion

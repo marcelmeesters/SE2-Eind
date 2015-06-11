@@ -48,7 +48,10 @@
                                             <td align="center">Klaar!</td>
                                         </tr>
                                         <tr>
-                                            <td>Uw account is succesvol geregistreerd</td>
+                                            <td>Uw account is succesvol geregistreerd<br/>
+                                                <a href="finish_registration.aspx" class="btn btn-success btn-lg">Maak uw registratie nu af</a>
+                                                <%Response.Redirect("finish_registration.aspx"); %>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td align="right">
