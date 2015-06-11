@@ -60,16 +60,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="admin\addRoom.aspx" />
     <Content Include="admin\cinemaAdd.aspx" />
     <Content Include="admin\cinemaAddProcess.aspx" />
     <Content Include="admin\cinemaDelete.aspx" />
     <Content Include="admin\cinemas.aspx" />
     <Content Include="admin\default.aspx" />
+    <Content Include="admin\doRoom.aspx" />
     <Content Include="admin\film.aspx" />
     <Content Include="admin\filmAdd.aspx" />
     <Content Include="admin\films.aspx" />
-    <Content Include="admin\loadRooms.aspx" />
     <Content Include="css\material-fullpalette.css.map" />
     <Content Include="css\material.css.map" />
     <Content Include="css\ripples.css.map" />
@@ -154,13 +153,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="admin\addRoom.aspx.cs">
-      <DependentUpon>addRoom.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\addRoom.aspx.designer.cs">
-      <DependentUpon>addRoom.aspx</DependentUpon>
-    </Compile>
     <Compile Include="admin\cinemaAdd.aspx.cs">
       <DependentUpon>cinemaAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -196,6 +188,13 @@
     <Compile Include="admin\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\doRoom.aspx.cs">
+      <DependentUpon>doRoom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\doRoom.aspx.designer.cs">
+      <DependentUpon>doRoom.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\film.aspx.cs">
       <DependentUpon>film.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -216,13 +215,6 @@
     </Compile>
     <Compile Include="admin\films.aspx.designer.cs">
       <DependentUpon>films.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin\loadRooms.aspx.cs">
-      <DependentUpon>loadRooms.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\loadRooms.aspx.designer.cs">
-      <DependentUpon>loadRooms.aspx</DependentUpon>
     </Compile>
     <Compile Include="database.cs" />
     <Compile Include="film.aspx.cs">
@@ -271,6 +263,7 @@
     <Compile Include="inc\User Controls\footer.ascx.designer.cs">
       <DependentUpon>footer.ascx</DependentUpon>
     </Compile>
+    <Compile Include="JSONHelper.cs" />
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

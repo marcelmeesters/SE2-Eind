@@ -22,5 +22,14 @@ namespace Pathe.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Debug {
+            get {
+                return ((bool)(this["Debug"]));
+            }
+        }
     }
 }

@@ -200,6 +200,22 @@ namespace Pathe
             return ExecuteQuery(cmd);
         }
 
+        public Dictionary<string, object> GetRoomInfo(int roomId)
+        {
+            OracleCommand cmd = new OracleCommand("SELECT * FROM ZAAL WHERE ZAALID = :zaalID");
+            cmd.Parameters.Add("zaalID", roomId);
+
+            return ExecuteQuery(cmd)[0];
+        }
+
+        public bool RoomExists(int roomID)
+        {
+            OracleCommand cmd = new OracleCommand("SELECT COUNT(*) AS COUNT FROM ZAAL WHERE ZAALID = :zaalID");
+            cmd.Parameters.Add("zaalID", roomID);
+
+            return (Convert.ToInt32(ExecuteQuery(cmd)[0]["COUNT"]) > 0);
+        }
+
         public bool CinemaExists(int bioscoopID)
         {
             OracleCommand cmd = new OracleCommand("SELECT COUNT(*) AS COUNT FROM BIOSCOOP WHERE BIOSCOOPID = :bioscoopID");

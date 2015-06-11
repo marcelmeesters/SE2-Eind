@@ -10,6 +10,6 @@
 namespace Pathe.admin {
     
     
-    public partial class loadRooms {
+    public partial class doRoom {
     }
 }

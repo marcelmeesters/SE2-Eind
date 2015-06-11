@@ -120,9 +120,9 @@
         
         function loadRooms(cinemaID) {
             xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("POST", "/admin/loadRooms.aspx", false);
+            xmlhttp.open("POST", "/admin/doRoom.aspx", false);
             xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xmlhttp.send("cinemaID=" + cinemaID);
+            xmlhttp.send("action=load&cinemaID=" + cinemaID);
 
             $("#roomModalBody").html(xmlhttp.responseText);
         }
@@ -133,16 +133,19 @@
             var cinemaID = $("#cinemaID").val();
             var imax = $("#chkImax").is(':checked');
             
+            console.log(imax);
+            
             xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("POST", "/admin/addRoom.aspx", false);
+            xmlhttp.open("POST", "/admin/doRoom.aspx", false);
             xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xmlhttp.send("cinemaID=" + cinemaID + "&number=" + number + "&chairs=" + chairs + "&imax=" + imax);
+            xmlhttp.send("action=add&cinemaID=" + cinemaID + "&number=" + number + "&chairs=" + chairs + "&imax=" + imax);
             
             if (xmlhttp.responseText == 'success') {
                 swal({
                     title: "Zaal toegevoegd!",
                     text: "De zaal is toegevoegd aan de bioscoop",
-                    type: "success"
+                    type: "success",
+                    timer: 1500
                 });
                 
                 loadRooms(cinemaID);
@@ -155,7 +158,73 @@
                 });
             }
         }
-    
+        
+        function GetRoomID() {
+            var roomId = 0;
+            $('#roomTable tr:hover').each(function () {
+                roomId = $(this).find("td:first").html();
+            });
+            return roomId;
+        }
+        
+        function LoadEditRoom() {
+            var roomId = GetRoomID();
+
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/admin/doRoom.aspx", false);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("action=info&roomID=" + roomId);
+            
+            var returned = JSON.parse(xmlhttp.responseText);
+            
+            var Id = returned.Id;
+            var nummer = returned.Number;
+            var chairs = returned.ChairCount;
+            var cinema = returned.CinemaID;
+            var Imax = returned.Imax;
+            
+            $("#btnAddRoom").addClass("hidden");
+            $("#btnEditRoom").removeClass("hidden");
+            
+            $("#numNummer").val(nummer);
+            $("#numChairs").val(chairs);
+            $("#cinemaID").val(cinema);
+            $("#roomID").val(roomId);
+            $("#chkImax").prop("checked", Imax);
+        }
+        
+        function updateRoom() {
+            var number = $("#numNummer").val();
+            var chairs = $("#numChairs").val();
+            var cinemaID = $("#cinemaID").val();
+            var roomID = $("#roomID").val();
+            var imax = $("#chkImax").is(':checked');
+
+
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/admin/doRoom.aspx", false);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("action=edit&cinemaID=" + cinemaID + "&number=" + number + "&chairs=" + chairs + "&imax=" + imax + "&roomID=" + roomID);
+
+            if (xmlhttp.responseText == 'success') {
+                swal({
+                    title: "Zaal Aangepast!",
+                    text: "De zaal is aangepast in het systeem",
+                    type: "success",
+                    timer: 1500
+                });
+
+                loadRooms(cinemaID);
+            }
+            else {
+                swal({
+                    title: "Oeps!",
+                    text: xmlhttp.responseText,
+                    type: "error",
+                    html: true
+                });
+            }
+        }
     
     </script>
 </asp:Content>
