@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pathe
 {
-    class SimpleDate
+    public class SimpleDate
     {
 
         private DateTime date;

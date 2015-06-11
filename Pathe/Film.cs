@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pathe
 {
-    class Film
+    public class Film
     {
         #region Fields
 
@@ -172,7 +172,7 @@ namespace Pathe
         
     }
 
-    internal enum Kijkwijzer
+    public enum Kijkwijzer
     {
         Al,
         Zes,

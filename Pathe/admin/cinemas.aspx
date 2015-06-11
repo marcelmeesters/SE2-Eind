@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/inc/Pathe_admin.master" AutoEventWireup="true" CodeBehind="cinemas.aspx.cs" Inherits="Pathe.admin.cinemas" %>
+﻿<%@ Page Title="Bioscopen - Pathé" Language="C#" MasterPageFile="~/inc/Pathe_admin.master" AutoEventWireup="true" CodeBehind="cinemas.aspx.cs" Inherits="Pathe.admin.cinemas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadPlaceholder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceholder" runat="server">
