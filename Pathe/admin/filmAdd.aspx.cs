@@ -61,37 +61,6 @@ namespace Pathe.admin
 
             int newID = temp.Create();
 
-            /* UPLOAD MULTIPLE IMAGES
-             * NOT QUITE YET DONE 
-            try
-            {
-                Directory.CreateDirectory(Server.MapPath("~\\img\\upload\\") + newID);
-
-                if (imgPoster.PostedFile != null && imgPoster.PostedFile.ContentLength > 0)
-                {
-                    for (int i = 0; i < Request.Files.Count; i++)
-                    {
-                        var file = Request.Files[i];
-                        images.Add(file.FileName);
-
-                        if (!Regex.IsMatch(file.FileName, @"^(.*\.)((jpg)|(jpeg)|(png)|(gif))$")) continue;
-
-                        string saveAs = Server.MapPath("~\\img\\upload\\") + newID + "\\" + file.FileName;
-                        file.SaveAs(saveAs);
-                    }
-                    if (!db.AddFilmImages(newID, images))
-                    {
-                        throw new Exception("Could not insert uploaded images into database.");
-                    }
-                    temp.Images = images;
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex);
-            }
-            */
-
             try
             {
                 Directory.CreateDirectory(Server.MapPath("~\\img\\upload\\") + newID);

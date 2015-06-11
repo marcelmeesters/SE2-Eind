@@ -192,6 +192,22 @@ namespace Pathe
             return Convert.ToInt32(ExecuteQuery(cmd)[0]["COUNT"]);
         }
 
+        public List<Dictionary<string, object>> GetRooms(int bioscoopID)
+        {
+            OracleCommand cmd = new OracleCommand("SELECT * FROM ZAAL WHERE BIOSCOOPID = :bioscoopID");
+            cmd.Parameters.Add("bioscoopID", bioscoopID);
+
+            return ExecuteQuery(cmd);
+        }
+
+        public bool CinemaExists(int bioscoopID)
+        {
+            OracleCommand cmd = new OracleCommand("SELECT COUNT(*) AS COUNT FROM BIOSCOOP WHERE BIOSCOOPID = :bioscoopID");
+            cmd.Parameters.Add("bioscoopID", bioscoopID);
+
+            return (Convert.ToInt32(ExecuteQuery(cmd)[0]["COUNT"]) > 0);
+        }
+
         #endregion
 
         #region Methods - Insert
@@ -282,6 +298,21 @@ namespace Pathe
             return Convert.ToInt32(ExecuteQuery(cmdId)[0]["ID"]);
         }
 
+        public int CreateRoom(int bioscoopID, int number, int chaircount, bool imax)
+        {
+            OracleCommand cmd = new OracleCommand("INSERT INTO ZAAL VALUES(NULL, :nummer, :chairs, :bioscoop, :imax)");
+
+            cmd.Parameters.Add("nummer", number);
+            cmd.Parameters.Add("chairs", chaircount);
+            cmd.Parameters.Add("bioscoop", bioscoopID);
+            cmd.Parameters.Add("imax", (imax) ? "1" : "0");
+
+            if (!Execute(cmd)) return 0;
+
+            cmd = new OracleCommand("SELECT MAX(ZAALID) AS ID FROM ZAAL");
+            return Convert.ToInt32(ExecuteQuery(cmd)[0]["ID"]);
+        }
+
         public bool CreateCinema(string name, string address, string city, string open, string lift, string toilet,
             string ring, string imax)
         {
@@ -344,6 +375,21 @@ namespace Pathe
             cmd.Parameters.Add("imax", isImax ? "1" : "0");
             cmd.Parameters.Add("i3d", isI3D ? "1" : "0");
             cmd.Parameters.Add("filmID", filmID);
+
+            return Execute(cmd);
+        }
+
+        public bool UpdateRoom(int id, int cinema, int number, int chairs, bool imax)
+        {
+            OracleCommand cmd =
+                new OracleCommand(
+                    "UPDATE ZAAL SET BIOSCOOPID = :bioscoop, ZAALNUMMER = :nummer, AANTALSTOELEN = :stoelen, CANIMAX = :imax WHERE ZAALID = :id");
+
+            cmd.Parameters.Add("bioscoop", cinema);
+            cmd.Parameters.Add("nummer", number);
+            cmd.Parameters.Add("stoelen", chairs);
+            cmd.Parameters.Add("imax", (imax) ? "1" : "0");
+            cmd.Parameters.Add("id", id);
 
             return Execute(cmd);
         }

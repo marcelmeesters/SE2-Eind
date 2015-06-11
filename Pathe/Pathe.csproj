@@ -60,6 +60,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\addRoom.aspx" />
     <Content Include="admin\cinemaAdd.aspx" />
     <Content Include="admin\cinemaAddProcess.aspx" />
     <Content Include="admin\cinemaDelete.aspx" />
@@ -68,6 +69,7 @@
     <Content Include="admin\film.aspx" />
     <Content Include="admin\filmAdd.aspx" />
     <Content Include="admin\films.aspx" />
+    <Content Include="admin\loadRooms.aspx" />
     <Content Include="css\material-fullpalette.css.map" />
     <Content Include="css\material.css.map" />
     <Content Include="css\ripples.css.map" />
@@ -152,6 +154,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\addRoom.aspx.cs">
+      <DependentUpon>addRoom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\addRoom.aspx.designer.cs">
+      <DependentUpon>addRoom.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\cinemaAdd.aspx.cs">
       <DependentUpon>cinemaAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -207,6 +216,13 @@
     </Compile>
     <Compile Include="admin\films.aspx.designer.cs">
       <DependentUpon>films.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\loadRooms.aspx.cs">
+      <DependentUpon>loadRooms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\loadRooms.aspx.designer.cs">
+      <DependentUpon>loadRooms.aspx</DependentUpon>
     </Compile>
     <Compile Include="database.cs" />
     <Compile Include="film.aspx.cs">
@@ -305,6 +321,7 @@
       <DependentUpon>template.aspx</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
+    <Compile Include="Zaal.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="admin\inc\" />

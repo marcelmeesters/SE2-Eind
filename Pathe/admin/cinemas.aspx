@@ -33,7 +33,7 @@
                         <td>
                             <i class="mdi-editor-mode-edit" title="Bewerk bioscoop"></i> &nbsp;&nbsp;&nbsp;
                             <i class="mdi-editor-insert-invitation" title="Bewerk agenda"></i> &nbsp;&nbsp;&nbsp;
-                            <i class="<%# RoomCountClass( Convert.ToInt32(Eval("BioscoopID"))) %>" title="Beheer zalen"></i> &nbsp;&nbsp;&nbsp;
+                            <i class="<%# RoomCountClass( Convert.ToInt32(Eval("BioscoopID"))) %>" title="Beheer zalen" data-toggle="modal" data-target="#roomsModal" onclick="loadRooms(<%# Eval("BioscoopID") %>)"></i> &nbsp;&nbsp;&nbsp;
                             <i class="mdi-content-remove-circle" title="Verwijder bioscoop" onclick="confirmDelete(<%# Eval("BioscoopID") %>, '<%# Eval("Naam") %>')"></i> &nbsp;&nbsp;&nbsp;
                         </td>
                     </tr>
@@ -47,11 +47,34 @@
         </div>
     </div>
     <asp:SqlDataSource ID="Cinemas" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString2 %>" ProviderName="<%$ ConnectionStrings:ConnectionString2.ProviderName %>" SelectCommand="SELECT * FROM BIOSCOOP b WHERE BIOSCOOPID <> 0 ORDER BY b.Naam"></asp:SqlDataSource>
+
+
+    <!-- Rooms -->
+    <div id="roomsModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Zalen beheren</h4><br /><br/>
+          </div>
+          <div class="modal-body" id="roomModalBody">
+            Loading..
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Sluit</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptsPlaceholder" runat="server">
     <script type="text/javascript">
         // Ask for confirmation before removing a cinema
-        function confirmDelete(biosID, biosNaam) {
+        function confirmDelete(cinemaID, biosNaam) {
             sweetAlert({
                 title: "Weet je het zeker?",
                 text: "De bioscoop <strong>" + biosNaam + "</strong> wordt permanent verwijderd",
@@ -66,7 +89,7 @@
                 xmlhttp = new XMLHttpRequest();
                 xmlhttp.open("POST", "/admin/cinemaDelete.aspx", false);
                 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xmlhttp.send("cinemaID=" + biosID + "&confirm=1");
+                xmlhttp.send("cinemaID=" + cinemaID + "&confirm=1");
                 if (xmlhttp.responseText == 'success') {
                     // Deleted successfully
                     swal({
@@ -75,7 +98,7 @@
                         type: "success",
                         timer: 2000
                     });
-                    deleteRow("table_row_cinema_" + biosID);
+                    deleteRow("table_row_cinema_" + cinemaID);
                 }
                 else {
                     // Something went wrong, show an error
@@ -93,6 +116,44 @@
         function deleteRow(rowid) {
             var row = document.getElementById(rowid);
             row.parentNode.removeChild(row);
+        }
+        
+        function loadRooms(cinemaID) {
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/admin/loadRooms.aspx", false);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("cinemaID=" + cinemaID);
+
+            $("#roomModalBody").html(xmlhttp.responseText);
+        }
+        
+        function AddRoom() {
+            var number = $("#numNummer").val();
+            var chairs = $("#numChairs").val();
+            var cinemaID = $("#cinemaID").val();
+            var imax = $("#chkImax").is(':checked');
+            
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/admin/addRoom.aspx", false);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("cinemaID=" + cinemaID + "&number=" + number + "&chairs=" + chairs + "&imax=" + imax);
+            
+            if (xmlhttp.responseText == 'success') {
+                swal({
+                    title: "Zaal toegevoegd!",
+                    text: "De zaal is toegevoegd aan de bioscoop",
+                    type: "success"
+                });
+                
+                loadRooms(cinemaID);
+            }
+            else {
+                swal({
+                    title: "Oeps!",
+                    text: xmlhttp.responseText,
+                    type: "error"
+                });
+            }
         }
     
     
