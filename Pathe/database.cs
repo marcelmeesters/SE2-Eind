@@ -194,7 +194,7 @@ namespace Pathe
 
         public List<Dictionary<string, object>> GetRooms(int bioscoopID)
         {
-            OracleCommand cmd = new OracleCommand("SELECT * FROM ZAAL WHERE BIOSCOOPID = :bioscoopID");
+            OracleCommand cmd = new OracleCommand("SELECT * FROM ZAAL WHERE BIOSCOOPID = :bioscoopID ORDER BY ZAALNUMMER ASC");
             cmd.Parameters.Add("bioscoopID", bioscoopID);
 
             return ExecuteQuery(cmd);
@@ -413,7 +413,12 @@ namespace Pathe
 
         public bool DeleteCinema(int cinemaID)
         {
-            OracleCommand cmd = new OracleCommand("UPDATE ZAAL SET BIOSCOOPID = 0 WHERE BIOSCOOPID = :bioscoopID");
+            OracleCommand cmd = new OracleCommand("UPDATE PLANNING SET ZAAL = (SELECT MIN(ZAALID) FROM ZAAL WHERE BIOSCOOPID = 0) WHERE ZAAL IN (SELECT ZAALID FROM ZAAL WHERE BIOSCOOPID = :bioscoopID)");
+            cmd.Parameters.Add("bioscoopID", cinemaID);
+
+            if (!Execute(cmd)) return false;
+
+            cmd = new OracleCommand("DELETE FROM ZAAL WHERE BIOSCOOPID = :bioscoopID");
             cmd.Parameters.Add("bioscoopID", cinemaID);
 
             if (!Execute(cmd)) return false;
